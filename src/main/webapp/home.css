@@ -38,3 +38,38 @@ body {
         text-shadow: 0 0 20px rgba(255, 0, 0, 0.5), 0 0 30px rgba(255, 0, 0, 0.5), 0 0 40px rgba(255, 0, 0, 0.5), 0 0 50px rgba(255, 0, 0, 0.5);
     }
 }
+
+.button, .dropdown a {
+    border: 1px solid #0A74DA;
+    background: linear-gradient(to bottom, #B6CFED, #63A0DA); /* Windows XP gradient effect */
+    color: #000; /* Text color */
+    text-shadow: none;
+    border-radius: 3px; /* Rounded corners */
+    display: block;
+    padding: 10px;
+    text-align: center;
+    user-select: none;
+}
+
+.button:active, .dropdown a:active {
+    background: linear-gradient(to bottom, #63A0DA, #B6CFED); /* Reverse gradient when button is pressed */
+    border: 1px solid #7B98B9;
+}
+
+.button:hover, .dropdown a:hover {
+    border: 1px solid #0A74DA;
+    background: linear-gradient(to bottom, #9CBFE4, #578AC9); /* Light hover effect */
+}
+
+.button {
+    box-shadow: 0px 0px 4px #888888; /* Add some shadow */
+    margin: 10px auto;
+    width: 150px;
+    position: relative;
+    cursor: pointer;
+}
+
+.button a {
+    text-decoration: none;
+    color: #000;
+}
