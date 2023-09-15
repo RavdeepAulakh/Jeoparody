@@ -9,12 +9,15 @@ public class SignupServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        out.println("<html>\n" + "<head><title>" + "Sign Up" + "</title></head>\n" + "<body>\n"
-                + "<h1 align=\"center\">" + "Sign Up" + "</h1>\n" + "<form action=\"signup\" method=\"POST\">\n"
-                + "Username: <input type=\"text\" name=\"user_id\">\n" + "<br />\n"
-                + "Password: <input type=\"password\" name=\"password\" />\n" + "<br />\n"
-                + "<input type=\"submit\" value=\"Sign up\" />\n" + "</form>\n"
-                + "</form>\n" + "</body>\n</html>\n");
+        InputStream inputStream = getServletContext().getResourceAsStream("/signup.html");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+        String line;
+        while ((line = reader.readLine()) != null) {
+            out.println(line);
+        }
+
+        reader.close();
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,18 +33,23 @@ public class SignupServlet extends HttpServlet {
             // Retrieve username and password from the HTTP request
             String username = request.getParameter("user_id");
             String password = request.getParameter("password");
+            String staffCode = request.getParameter("staff_code");
             System.out.println("Username: " + username);
             System.out.println("Password: " + password);
             String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
             System.out.println("Hashed Password " + hashedPassword);
+            System.out.println("Staff Code: " + staffCode);
+
+            boolean isStaff = "12345".equals(staffCode);
 
             // Create an SQL INSERT statement to add the new user
-            String insertSQL = "INSERT INTO accounts (username, password) VALUES (?, ?)";
+            String insertSQL = "INSERT INTO accounts (username, password, is_staff) VALUES (?, ?, ?)";
 
             // Use PreparedStatement to safely insert the values into the database
             PreparedStatement preparedStatement = con.prepareStatement(insertSQL);
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, hashedPassword);
+            preparedStatement.setBoolean(3, isStaff);
 
             // Execute the INSERT statement to add the new user
             int rowsInserted = preparedStatement.executeUpdate();
