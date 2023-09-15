@@ -4,6 +4,8 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.*;
 import java.sql.*;
 import java.io.*;
+import org.mindrot.jbcrypt.BCrypt; // Import the BCrypt library
+
 public class LoginServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
@@ -13,47 +15,58 @@ public class LoginServlet extends HttpServlet {
                 + "Username: <input type=\"text\" name=\"user_id\">\n" + "<br />\n"
                 + "Password: <input type=\"password\" name=\"password\" />\n" + "<br />\n"
                 + "<input type=\"submit\" value=\"Sign in\" />\n" + "</form>\n"
-                + "</form>\n" + "</body>\n</html\n");
-
+                + "</form>\n" + "</body>\n</html>\n");
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         String errMsg = "";
         Connection con = null;
+
         try {
-            try { Class.forName("oracle.jdbc.OracleDriver"); } catch (Exception ex) { }
-            con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "oracle1");
-            Statement stmt2 = con.createStatement();
-            ResultSet rs = stmt2.executeQuery("select * from accounts");
-            while (rs.next()) {
-                String username = rs.getString("username");
-                String password = rs.getString("password");
-                System.out.println("   " + username + "  " + password);
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jeoparody", "root", "hockey04");
+
+            // Retrieve username and plaintext password from the HTTP request
+            String username = request.getParameter("user_id");
+            String enteredPassword = request.getParameter("password");
+
+            // Retrieve the hashed password from the database
+            PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM accounts WHERE username=?");
+            preparedStatement.setString(1, username);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                String dbHashedPassword = resultSet.getString("password");
+                // Check if the entered password matches the stored hashed password using BCrypt
+                if (BCrypt.checkpw(enteredPassword, dbHashedPassword)) {
+                    // Successful login
+                    HttpSession session = request.getSession(true);
+                    session.setAttribute("USER_ID", username);
+                    response.sendRedirect("login"); // Redirect to the home page
+                } else {
+                    // Failed login
+                    errMsg = "Invalid username or password.";
+                    // You can handle failed login here (e.g., display an error message)
+                }
+            } else {
+                // User not found
+                errMsg = "User not found.";
+                // You can handle this case as needed (e.g., display an error message)
             }
-            stmt2.close();
+
+            preparedStatement.close();
             con.close();
-            System.out.println("\n\n");
-        } catch(SQLException ex) {
-            errMsg = errMsg + "\n--- SQLException caught ---\n";
-            while (ex != null) {
-                errMsg += "Message: " + ex.getMessage ();
-                errMsg += "SQLState: " + ex.getSQLState ();
-                errMsg += "ErrorCode: " + ex.getErrorCode ();
-                ex = ex.getNextException();
-                errMsg += "";
-            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            // Handle exceptions
+            ex.printStackTrace();
+            errMsg = "An error occurred during login.";
+            // You can handle errors here (e.g., display an error message)
         }
+
+        // If login failed or an error occurred, display an error message
         PrintWriter out = response.getWriter();
-        response.setContentType("text/html");
-
-
-        String title = "Logged in as: ";
-        String username = request.getParameter("user_id");
-        String password = request.getParameter("password");
-        HttpSession session = request.getSession(true);
-        session.setAttribute("USER_ID", username);
-        response.setStatus(302);
-        response.sendRedirect("main");
+        out.println("<html><body><p>" + errMsg + "</p></body></html>");
     }
 }
+
