@@ -1,3 +1,5 @@
+//get the first 4 buttons from html
+let originalButtonsHTML = document.querySelector('.buttons').innerHTML;
 
 /**
  * Shows first options from the first menu
@@ -14,10 +16,12 @@ function showOptions(type) {
             {label: "3 Players", onClick: "fetchCategories()"},
             {label: "4 Players", onClick: "fetchCategories()"}
         ]);
-        addBackButton();
+        // Go back to the main menu
+        addBackButton(function() {
+            showOptions('single');
+        });
     }
 }
-
 
 /**
  * Shows categories for multiplayer
@@ -44,33 +48,26 @@ function fetchCategories() {
         });
 }
 
+/**
+ * Reset the buttons to original menu
+ */
+function resetButtons() {
+    let optionsContainer = document.querySelector('.buttons');
+    optionsContainer.innerHTML = originalButtonsHTML;
+}
 
 /**
- * Add a back button
+ * Add a back button with a reset action
  */
 function addBackButton() {
     let optionsContainer = document.querySelector('.buttons');
     let backButton = document.createElement('div');
     backButton.className = 'button';
-    backButton.setAttribute('onclick', 'clearOptions()');
+    backButton.addEventListener('click', resetButtons);
     backButton.innerHTML = '<span>Back</span>';
     optionsContainer.appendChild(backButton);
 }
 
-/**
- * Function removes the buttons
- */
-function clearOptions() {
-    let optionsContainer = document.querySelector('.buttons');
-    optionsContainer.innerHTML = `
-        <div class="button" onclick="showOptions('single')">
-            <span>SinglePlayer</span>
-        </div>
-        <div class="button" onclick="showOptions('multi')">
-            <span>MultiPlayer</span>
-        </div>
-    `;
-}
 
 /**
  * Renders the options
