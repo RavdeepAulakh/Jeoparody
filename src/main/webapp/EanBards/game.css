@@ -1,8 +1,15 @@
 /* Style for the question page */
 body {
-    font-family: Arial, sans-serif;
+    /* font-family: Korinna BT, serif; */
+    font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
+    text-transform: uppercase;
+
+    background-image: url('blank-jeopardy.jpg');
+    background-size: cover; /* This will make the background image cover the entire viewport */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    height: 100vh;
 }
 
 .header {
@@ -21,12 +28,15 @@ body {
 }
 
 .image-container img {
-    width: 300px; /* Set your desired fixed width */
-    height: 200px; /* Set your desired fixed height */
-    object-fit: cover; /* Preserve aspect ratio and cover the container */
+    width: 300px;
+    /* Set your desired fixed width */
+    height: 200px;
+    /* Set your desired fixed height */
+    object-fit: cover;
+    /* Preserve aspect ratio and cover the container */
 }
 
-.questions {
+.question-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
@@ -34,17 +44,27 @@ body {
 }
 
 .question {
-    background-color: #f9f9f9;
+    background-color: #040c7a;
     border: 1px solid #ddd;
     padding: 20px;
 }
 
 .question h2 {
+    color: white;
+    /* For Safari and Chrome */
+    -webkit-text-stroke: 1px black;
+    /* For Firefox */
+    text-stroke: 1px black;
     margin: 0;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .question p {
     margin-top: 10px;
     font-size: 16px;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
 }
