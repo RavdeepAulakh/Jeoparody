@@ -68,3 +68,18 @@ body {
     text-align: center;
     margin-top: 20px;
 }
+
+.empty-squares {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.empty-square {
+    width: 25px; 
+    height: 25px;
+    margin: 10px;
+    background-color: darkgray;
+    border-color: black;
+    border: 1px solid black;
+}
