@@ -20,6 +20,7 @@ import java.util.UUID;
 import java.text.*;
 import java.nio.*;
 
+@MultipartConfig
 public class InputQuestionServlet extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -92,8 +93,8 @@ public class InputQuestionServlet extends HttpServlet{
                     catID = 5;
                     break;
             }
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jeoparody", "root", "hockey04");
-            PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO Questions (Category,Question, Video, Audio, ImagePath, Caption, Content) VALUES (?,?,?,?,?,?,?)");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jeoparody", "root", "131599Jalopy!");
+            PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO Questions (category_id, question_text, video_url, audio_url, image_location_data, image_caption) VALUES (?,?,?,?,?,?)");
 //            UUID uuid = UUID.randomUUID();
             // if image is null (meaning its url or neither)
             // if url is null (meaning its image)
@@ -104,7 +105,7 @@ public class InputQuestionServlet extends HttpServlet{
             preparedStatement.setString(4, audio);
             preparedStatement.setString(5, "image/" + fileName);
             preparedStatement.setString(6, imageCaption);
-            preparedStatement.setBinaryStream(7, filePart.getInputStream());
+//            preparedStatement.setBinaryStream(7, filePart.getInputStream());
             int row = preparedStatement.executeUpdate();
             preparedStatement.close();
             //con.close();
@@ -118,22 +119,16 @@ public class InputQuestionServlet extends HttpServlet{
             }
         }
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jeoparody", "root", "hockey04");
-            PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO Options (text, isCorrect) VALUES (?,?)");
-//            UUID uuid = UUID.randomUUID();
-            // if image is null (meaning its url or neither)
-            // if url is null (meaning its image)
-            // else set image and url to null
-            preparedStatement.setString(1,option1);
-            preparedStatement.setBoolean(2, option1Correct);
-            preparedStatement.setString(1,option2);
-            preparedStatement.setBoolean(2, option2Correct);
-            preparedStatement.setString(1,option3);
-            preparedStatement.setBoolean(2, option3Correct);
-            preparedStatement.setString(1,option4);
-            preparedStatement.setBoolean(2, option4Correct);
-            int row = preparedStatement.executeUpdate();
-            preparedStatement.close();
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jeoparody", "root", "131599Jalopy!");
+            String[] optionText = { option1, option2, option3, option4 };
+            boolean[] optionValues = {option1Correct, option2Correct, option3Correct, option4Correct};
+            for (int i = 0; i < optionText.length; i++) {
+                PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO Options (option_text, is_correct) VALUES (?,?)");
+                preparedStatement.setString(1,optionText[i]);
+                preparedStatement.setBoolean(2, optionValues[i]);
+                int row = preparedStatement.executeUpdate();
+                preparedStatement.close();
+            }
             //con.close();
         } catch(SQLException ex2) {
             while (ex2 != null) {
