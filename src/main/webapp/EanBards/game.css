@@ -59,7 +59,7 @@ body {
 
 .question {
     background-color: #040c7a;
-    border: 1px solid black;
+    border: 3px solid black;
     padding: 20px;
     box-sizing: border-box;
 }
@@ -79,13 +79,17 @@ body {
     font-size: 16px;
 }
 
+.question:hover {
+    background-color: #1929bf;
+    transition: background-color 0.3s;
+}
+
 .button-container {
     display: flex;
     justify-content: space-between;
     margin: 20px;
     padding: 0 20px; /* Add padding to the container to separate buttons from the sides */
 }
-
 
 .button {
     font-family: Arial, Helvetica, sans-serif;
@@ -94,8 +98,12 @@ body {
     font-size: large;
     background-color: #040c7a;
     color: white;
-    border: 1px solid black;
+    border: 3px solid black;
     cursor: pointer;
+}
+
+.button:hover {
+    background-color: #1929bf;
     transition: background-color 0.3s;
 }
 
@@ -119,5 +127,12 @@ body {
     margin: 10px;
     background-color: darkgray;
     border-color: black;
-    border: 1px solid black;
+    border: 3px solid black;
 }
+
+.score {
+    text-align: center; /* Center the text horizontally */
+    font-size: 36px;    /* Set a larger font size */
+    color: gold;        /* Set the text color to gold */
+  }
+  
