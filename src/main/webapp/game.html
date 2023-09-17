@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jeopardy Game</title>
+  <script>
+    var currentQuestionIndex = 0;
+    var questions = [];
+    var optionsList = [];
+    var correctAnswers = [];
+
+    function loadQuestion() {
+      // Get languageId and categoryId from the URL query parameters
+      var params = new URLSearchParams(window.location.search);
+      var languageId = params.get("languageId");
+      var categoryId = params.get("categoryId");
+
+      // Fetch the current question and options using AJAX
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          var response = JSON.parse(xhr.responseText);
+          questions = response.questions;
+          optionsList = response.optionsList;
+          correctAnswers = response.correctAnswers;
+
+          // Display the current question and options
+          var questionContainer = document.getElementById("question-container");
+          questionContainer.innerHTML = "<h2>" + questions[currentQuestionIndex] + "</h2>";
+
+          var options = optionsList[currentQuestionIndex];
+          for (var i = 0; i < options.length; i++) {
+            questionContainer.innerHTML += "<button onclick='checkAnswer(" + i + ")'>" + options[i] + "</button>";
+          }
+        }
+      };
+
+      xhr.open("GET", "/game?languageId=" + languageId + "&categoryId=" + categoryId + "&questionIndex=" + currentQuestionIndex, true);
+      xhr.send();
+    }
+
+
+    function checkAnswer(optionIndex) {
+      // Check if the selected option is correct
+      if (optionIndex === correctAnswers[currentQuestionIndex]) {
+        alert("Correct!");
+      } else {
+        alert("Incorrect!");
+      }
+
+      // Move to the next question
+      currentQuestionIndex++;
+      if (currentQuestionIndex < questions.length) {
+        loadQuestion();
+      } else {
+        alert("End of the game!");
+      }
+    }
+
+    // Load the first question when the page loads
+    loadQuestion();
+  </script>
+</head>
+<body>
+<div id="question-container">
+  <!-- The current question and options will be loaded here -->
+</div>
+</body>
+</html>

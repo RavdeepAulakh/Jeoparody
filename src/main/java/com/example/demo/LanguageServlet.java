@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class CategoryServlet extends HttpServlet {
+public class LanguageServlet extends HttpServlet {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/jeoparody";
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "hockey04";
@@ -21,17 +21,7 @@ public class CategoryServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        out.println("<html><head><title>Select Category</title></head><body>");
-
-        // Get the language ID from the request, assuming it's passed as a parameter
-        String languageIdParam = request.getParameter("languageId");
-        if (languageIdParam == null || languageIdParam.isEmpty()) {
-            out.println("Language ID is missing in the request.");
-            out.println("</body></html>");
-            return;
-        }
-
-        int languageId = Integer.parseInt(languageIdParam);
+        out.println("<html><head><title>Select Language</title></head><body>");
 
         Connection conn = null;
         Statement stmt = null;
@@ -44,17 +34,17 @@ public class CategoryServlet extends HttpServlet {
             // Establish the database connection
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 
-            // Create and execute the SQL query to fetch categories by language ID
+            // Create and execute the SQL query
             stmt = conn.createStatement();
-            String sql = "SELECT * FROM categories WHERE language_id = " + languageId;
+            String sql = "SELECT * FROM Languages";
             rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                int categoryId = rs.getInt("category_id");
-                String categoryName = rs.getString("category_name");
+                int id = rs.getInt("language_id");
+                String name = rs.getString("language_name");
 
-                // Create a button for each category
-                out.println("<button onclick=\"selectCategory(" + categoryId + ")\">" + categoryName + "</button><br>");
+                // Create a button for each language
+                out.println("<button onclick=\"selectLanguage(" + id + ")\">" + name + "</button><br>");
             }
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
@@ -71,10 +61,9 @@ public class CategoryServlet extends HttpServlet {
 
         // JavaScript function to handle button click
         out.println("<script>");
-        out.println("function selectCategory(categoryId) {");
-        out.println("  var languageId = " + languageId + ";"); // Get the languageId from the current page
-        out.println("  // Redirect to the GameServlet with the selected category and language IDs as parameters");
-        out.println("  window.location.href = 'game?languageId=' + languageId + '&categoryId=' + categoryId;");
+        out.println("function selectLanguage(languageId) {");
+        out.println("  // Redirect to the CategoryServlet with the selected language ID as a parameter");
+        out.println("  window.location.href = 'categories?languageId=' + languageId;");
         out.println("}");
         out.println("</script>");
 
