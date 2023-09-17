@@ -59,7 +59,7 @@ const questions = [
         options: ["F. W. de Klerk", "Desmond Tutu", "Nelson Mandela", "Steve Biko"],
         correctAnswer: "Nelson Mandela",
         image: "Gallery/FPQ10.jpg"
-    }
+    },
 ];
 
 
@@ -120,6 +120,21 @@ function updateImage() {
     }
 }
 
+function generateSquares() {
+    const squaresContainer = document.querySelector(".empty-squares");
+
+    // Clear the squaresContainer first to ensure there are no squares
+    squaresContainer.innerHTML = '';
+
+    for (let i = 0; i < questions.length; i++) {
+        const squareElement = document.createElement("div");
+        squareElement.classList.add("empty-square");
+        squareElement.id = "square" + (i + 1);
+        squaresContainer.appendChild(squareElement);
+    }
+}
+
+
 function UpdateSquare() {
     const emptySquares = document.querySelectorAll(".empty-square");
     for (let i = 0; i < emptySquares.length; i++) {
@@ -170,6 +185,6 @@ function prevQuestion() {
     }
 }
 
-
+generateSquares();
 // Initial display of the first question
 displayQuestion();
