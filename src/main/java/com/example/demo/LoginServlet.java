@@ -46,7 +46,9 @@ public class LoginServlet extends HttpServlet {
                     // Successful login
                     HttpSession session = request.getSession(true);
                     session.setAttribute("USER_ID", username);
-                    response.sendRedirect("login"); // Redirect to the home page
+                    Cookie userLoggedInCookie = new Cookie("userLoggedIn", "true");
+                    response.addCookie(userLoggedInCookie);
+                    response.sendRedirect("index.html"); // Redirect to the home page
                 } else {
                     // Failed login
                     errMsg = "Invalid username or password.";
