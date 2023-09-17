@@ -1,8 +1,5 @@
 body {
-    /* font-family: Korinna BT, serif; */
     font-family: Arial, Helvetica, sans-serif;
-    margin: 0;
-    padding: 0;
     text-transform: uppercase;
 
     background-image: url('blank-jeopardy.jpg');
@@ -89,8 +86,12 @@ body {
     padding: 0 20px; /* Add padding to the container to separate buttons from the sides */
 }
 
+
 .button {
-    padding: 10px 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    padding: 20px 40px;
+    font-size: large;
     background-color: #040c7a;
     color: white;
     border: 1px solid black;
