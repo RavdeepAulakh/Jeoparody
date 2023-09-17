@@ -1,8 +1,5 @@
 body {
-    /* font-family: Korinna BT, serif; */
     font-family: Arial, Helvetica, sans-serif;
-    margin: 0;
-    padding: 0;
     text-transform: uppercase;
 
     background-image: url('blank-jeopardy.jpg');
@@ -62,7 +59,7 @@ body {
 
 .question {
     background-color: #040c7a;
-    border: 1px solid black;
+    border: 3px solid black;
     padding: 20px;
     box-sizing: border-box;
 }
@@ -82,6 +79,11 @@ body {
     font-size: 16px;
 }
 
+.question:hover {
+    background-color: #1929bf;
+    transition: background-color 0.3s;
+}
+
 .button-container {
     display: flex;
     justify-content: space-between;
@@ -90,11 +92,18 @@ body {
 }
 
 .button {
-    padding: 10px 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    padding: 20px 40px;
+    font-size: large;
     background-color: #040c7a;
     color: white;
-    border: 1px solid black;
+    border: 3px solid black;
     cursor: pointer;
+}
+
+.button:hover {
+    background-color: #1929bf;
     transition: background-color 0.3s;
 }
 
@@ -118,5 +127,12 @@ body {
     margin: 10px;
     background-color: darkgray;
     border-color: black;
-    border: 1px solid black;
+    border: 3px solid black;
 }
+
+.score {
+    text-align: center; /* Center the text horizontally */
+    font-size: 36px;    /* Set a larger font size */
+    color: gold;        /* Set the text color to gold */
+  }
+  

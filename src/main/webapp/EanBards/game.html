@@ -10,15 +10,15 @@
 
 <body>
 
-    <div style="display: flex; justify-content: center; align-items: center; color: white;">
-        <h2 id="question"></h2>
-    </div>
-
     <div class="container">
         <div class="image-container">
             <img class="media" src="old-tv-1.gif" alt="Image Description">
             <img class="vintage-tv" src="old-tv.png" alt="Overlay TV">
         </div>
+    </div>
+
+    <div style="display: flex; justify-content: center; align-items: center; color: white;">
+        <h2 id="question"></h2>
     </div>
 
     <div class="button-container">
@@ -40,6 +40,8 @@
         <div class="empty-square" id="square10"></div>
     </div>
 
+    <div class="score" id="score">Score: 0</div>
+
     <div class="question-container">
             <div class="question">
                 <h2 id="option1" onclick="checkAnswer(0)">Spongebob Squarepants</h2>
@@ -54,8 +56,6 @@
                 <h2 id="option4" onclick="checkAnswer(3)">Drake "@champagnepapi" Graham</h2>
             </div>
     </div>
-
-    <div id="score">Score: 0</div>
 
     <script src="game.js"></script>
 </body>
