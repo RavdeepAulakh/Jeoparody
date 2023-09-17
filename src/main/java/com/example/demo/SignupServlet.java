@@ -37,14 +37,12 @@ public class SignupServlet extends HttpServlet {
             String password = request.getParameter("password");
             String staffCode = request.getParameter("staff_code");
 
-            // Check if the staff code is correct
-            if ("12345".equals(staffCode)) {
+
                 // Staff code is correct, proceed with account creation
                 System.out.println("Username: " + username);
                 System.out.println("Password: " + password);
                 String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
                 System.out.println("Hashed Password " + hashedPassword);
-                System.out.println("Staff Code: " + staffCode);
 
                 // Create an SQL INSERT statement to add the new user
                 String insertSQL = "INSERT INTO accounts (username, password) VALUES (?, ?)";
@@ -66,10 +64,7 @@ public class SignupServlet extends HttpServlet {
                 }
 
                 preparedStatement.close();
-            } else {
-                // Staff code is incorrect
-                errMsg = "Invalid staff code. Account creation is not allowed.";
-            }
+
 
             con.close();
         } catch (SQLException ex) {
