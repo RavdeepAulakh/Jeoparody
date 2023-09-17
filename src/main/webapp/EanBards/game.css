@@ -19,9 +19,7 @@ body {
 
 .container {
     position: relative; /* Create a positioning context for child elements */
-    width: 300px; /* Set a fixed width for the container */
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
 }
 
 .image-container {
@@ -30,13 +28,15 @@ body {
     margin-top: 20px;
     width: 450px;
     height: 300px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .media {
     position: absolute; /* Position the GIF image absolutely within the container */
     top: 0;
-    left: 0;
-    width: 100%;
+    left: 10px;
+    width: 95%;
     height: 100%;
     object-fit: cover;
     z-index: 1; /* Place the GIF image below the PNG image */
