@@ -1,55 +1,67 @@
+const defaultImage = "old-tv-1.gif"; 
 const questions = [
-    {
-        question: "This U.S. president was known for his 'Great Society' programs in the 1960s.",
-        options: ["Richard Nixon", "Gerald Ford", "Lyndon B. Johnson", "John F. Kennedy"],
-        correctAnswer: "Lyndon B. Johnson"
-    },
     {
         question: "This legendary boxer was originally named Cassius Clay.",
         options: ["Joe Frazier", "Sugar Ray Leonard", "Muhammad Ali", "George Foreman"],
-        correctAnswer: "Muhammad Ali"
+        correctAnswer: "Muhammad Ali",
+        image: "Gallery/FPQ1.jpg"
     },
     {
-        question: "He was the British Prime Minister throughout much of the 1980s and was known for his close relationship with President Reagan.",
-        options: ["Tony Blair", "John Major", "Harold Wilson", "Margaret Thatcher"],
-        correctAnswer: "Margaret Thatcher"
-    },
-    {
-        question: "This pop icon became the 'Queen of Pop' during the 1980s.",
-        options: ["Whitney Houston", "Janet Jackson", "Tina Turner", "Madonna"],
-        correctAnswer: "Madonna"
-    },
-    {
-        question: "This South African leader was released from prison in 1990 after 27 years.",
-        options: ["F. W. de Klerk", "Desmond Tutu", "Nelson Mandela", "Steve Biko"],
-        correctAnswer: "Nelson Mandela"
-    },
-    {
-        question: "This former Beatle was tragically assassinated in 1980.",
-        options: ["John Lennon", "Paul McCartney", "George Harrison", "Ringo Starr"],
-        correctAnswer: "John Lennon"
+        question: "This actress starred in the movie 'Breakfast at Tiffany's.'",
+        options: ["Marilyn Monroe", "Audrey Hepburn", "Elizabeth Taylor", "Grace Kelly"],
+        correctAnswer: "Audrey Hepburn",
+        image: "Gallery/FPQ2.jpg"
     },
     {
         question: "This actress and singer played Sandy in the movie 'Grease.'",
         options: ["Debbie Reynolds", "Liza Minnelli", "Olivia Newton-John", "Barbra Streisand"],
-        correctAnswer: "Olivia Newton-John"
-    },
-    {
-        question: "This U.S. president was in office during the Moon landing in 1969.",
-        options: ["Richard Nixon", "Gerald Ford", "Lyndon B. Johnson", "John F. Kennedy"],
-        correctAnswer: "Richard Nixon"
+        correctAnswer: "Olivia Newton-John",
+        image: "Gallery/FPQ3.jpg"
     },
     {
         question: "This director is known for the movie 'E.T. the Extra-Terrestrial' in the 1980s.",
         options: ["George Lucas", "Steven Spielberg", "James Cameron", "Ridley Scott"],
-        correctAnswer: "Steven Spielberg"
+        correctAnswer: "Steven Spielberg",
+        image: "Gallery/FPQ4.jpg"
     },
     {
-        question: "This actor played the role of James Bond multiple times during the 1970s.",
-        options: ["Sean Connery", "Pierce Brosnan", "Timothy Dalton", "Roger Moore"],
-        correctAnswer: "Roger Moore"
+        question: "He was known as the 'King of Pop.'",
+        options: ["Elvis Presley", "Michael Jackson", "Prince", "Freddie Mercury"],
+        correctAnswer: "Michael Jackson",
+        image: "Gallery/FPQ5.jpg"
+    },
+    {
+        question: "This actress played Princess Leia in the 'Star Wars' series.",
+        options: ["Natalie Portman", "Carrie Fisher", "Sigourney Weaver", "Linda Hamilton"],
+        correctAnswer: "Carrie Fisher",
+        image: "Gallery/FPQ6.jpg"
+    },
+    {
+        question: "This legendary guitarist played the national anthem at Woodstock in 1969.",
+        options: ["Eric Clapton", "Jimmy Page", "Jimi Hendrix", "Keith Richards"],
+        correctAnswer: "Jimi Hendrix",
+        image: "Gallery/FPQ7.jpg"
+    },
+    {
+        question: "He became famous for playing the role of 'The Terminator' in the 1984 movie.",
+        options: ["Jean-Claude Van Damme", "Bruce Willis", "Sylvester Stallone", "Arnold Schwarzenegger"],
+        correctAnswer: "Arnold Schwarzenegger",
+        image: "Gallery/FPQ8.jpg"
+    },
+    {
+        question: "This pop icon became the 'Queen of Pop' during the 1980s.",
+        options: ["Whitney Houston", "Janet Jackson", "Tina Turner", "Madonna"],
+        correctAnswer: "Madonna",
+        image: "Gallery/FPQ9.jpg"
+    },
+    {
+        question: "This South African leader was released from prison in 1990 after 27 years.",
+        options: ["F. W. de Klerk", "Desmond Tutu", "Nelson Mandela", "Steve Biko"],
+        correctAnswer: "Nelson Mandela",
+        image: "Gallery/FPQ10.jpg"
     }
 ];
+
 
 
 let currentQuestion = 0;
@@ -95,6 +107,17 @@ function displayQuestion() {
     option4Element.textContent = current.options[3];
 
     UpdateSquare();
+    updateImage();
+}
+
+function updateImage() {
+    const imageElement = document.getElementById("media");
+    
+    if (answeredQuestions[currentQuestion]) {
+        imageElement.src = questions[currentQuestion].image;
+    } else {
+        imageElement.src = defaultImage;
+    }
 }
 
 function UpdateSquare() {
@@ -127,7 +150,7 @@ function checkAnswer(selectedOption) {
     }
 
     document.getElementById("score").textContent = "Score: " + score;
-    nextQuestion();
+    updateImage();
 }
 
 
