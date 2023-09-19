@@ -10,12 +10,15 @@ public class LoginServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        out.println("<html>\n" + "<head><title>" + "Login" + "</title></head>\n" + "<body>\n"
-                + "<h1 align=\"center\">" + "Login" + "</h1>\n" + "<form action=\"login\" method=\"POST\">\n"
-                + "Username: <input type=\"text\" name=\"user_id\">\n" + "<br />\n"
-                + "Password: <input type=\"password\" name=\"password\" />\n" + "<br />\n"
-                + "<input type=\"submit\" value=\"Sign in\" />\n" + "</form>\n"
-                + "</form>\n" + "</body>\n</html>\n");
+        InputStream inputStream = getServletContext().getResourceAsStream("/login.html");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+        String line;
+        while ((line = reader.readLine()) != null) {
+            out.println(line);
+        }
+
+        reader.close();
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,7 +28,7 @@ public class LoginServlet extends HttpServlet {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jeoparody", "root", "hockey04");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jeoparody5", "root", "");
 
             // Retrieve username and plaintext password from the HTTP request
             String username = request.getParameter("user_id");
@@ -43,7 +46,9 @@ public class LoginServlet extends HttpServlet {
                     // Successful login
                     HttpSession session = request.getSession(true);
                     session.setAttribute("USER_ID", username);
-                    response.sendRedirect("login"); // Redirect to the home page
+                    Cookie userLoggedInCookie = new Cookie("userLoggedIn", "true");
+                    response.addCookie(userLoggedInCookie);
+                    response.sendRedirect("index.html"); // Redirect to the home page
                 } else {
                     // Failed login
                     errMsg = "Invalid username or password.";

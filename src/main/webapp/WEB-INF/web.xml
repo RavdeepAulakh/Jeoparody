@@ -33,5 +33,45 @@
         <servlet-name>CategoryServlet</servlet-name>
         <url-pattern>/categories</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>GameServlet</servlet-name>
+        <servlet-class>com.example.demo.GameServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>GameServlet</servlet-name>
+        <url-pattern>/game</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DisplayServlet</servlet-name>
+        <servlet-class>com.example.demo.DisplayServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DisplayServlet</servlet-name>
+        <url-pattern>/display</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>com.example.demo.LogoutServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LanguageServlet</servlet-name>
+        <servlet-class>com.example.demo.LanguageServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>LanguageServlet</servlet-name>
+        <url-pattern>/language</url-pattern>
+    </servlet-mapping>
 
 </web-app>

@@ -86,3 +86,27 @@ function renderOptions(options) {
         optionsContainer.appendChild(btn);
     });
 }
+
+function toggleButtons() {
+    let loginButton = document.getElementById("loginButton");
+    let signupButton = document.getElementById("signupButton");
+    let logoutButton = document.getElementById("logoutButton");
+
+    // Read the "userLoggedIn" cookie
+    let userLoggedInCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith("userLoggedIn="));
+
+    if (userLoggedInCookie && userLoggedInCookie.split('=')[1] === "true") {
+        // User is logged in, hide login and sign-up, show logout
+        loginButton.style.display = "none";
+        signupButton.style.display = "none";
+        logoutButton.style.display = "block";
+    } else {
+        // User is not logged in, show login and sign-up, hide logout
+        loginButton.style.display = "block";
+        signupButton.style.display = "block";
+        logoutButton.style.display = "none";
+    }
+}
+
+toggleButtons();
+
