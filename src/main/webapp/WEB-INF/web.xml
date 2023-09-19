@@ -45,6 +45,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>DisplayServlet</servlet-name>
+        <servlet-class>com.example.demo.DisplayServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DisplayServlet</servlet-name>
+        <url-pattern>/display</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>com.example.demo.LogoutServlet</servlet-class>
     </servlet>

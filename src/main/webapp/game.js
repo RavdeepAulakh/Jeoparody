@@ -96,6 +96,33 @@ const questions = [
   },
 ];
 
+let urlParams = new URLSearchParams(window.location.search);
+let languageId = urlParams.get('languageId');
+let categoryId = urlParams.get('categoryId');
+
+
+function fetchDataFromServlet(languageId, categoryId) {
+  fetch(`/demo_war_exploded/game?languageId=${languageId}&categoryId=${categoryId}`)
+      .then(response => response.json())
+      .then(data => {
+        // Use the fetched data here. For instance:
+        const questions = data.questions;
+        const optionsList = data.optionsList;
+        const correctAnswers = data.correctAnswers;
+
+
+
+        console.log(questions)
+      })
+      .catch(error => {
+        console.error("Error fetching data from GameServlet:", error);
+      });
+}
+
+
+fetchDataFromServlet(languageId, categoryId);
+
+
 let currentQuestion = 0;
 let score = 0;
 
