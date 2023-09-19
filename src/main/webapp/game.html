@@ -1,68 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <title>Jeopardy Game</title>
-  <script>
-    var currentQuestionIndex = 0;
-    var questions = [];
-    var optionsList = [];
-    var correctAnswers = [];
-
-    function loadQuestion() {
-      // Get languageId and categoryId from the URL query parameters
-      var params = new URLSearchParams(window.location.search);
-      var languageId = params.get("languageId");
-      var categoryId = params.get("categoryId");
-
-      // Fetch the current question and options using AJAX
-      var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          var response = JSON.parse(xhr.responseText);
-          questions = response.questions;
-          optionsList = response.optionsList;
-          correctAnswers = response.correctAnswers;
-
-          // Display the current question and options
-          var questionContainer = document.getElementById("question-container");
-          questionContainer.innerHTML = "<h2>" + questions[currentQuestionIndex] + "</h2>";
-
-          var options = optionsList[currentQuestionIndex];
-          for (var i = 0; i < options.length; i++) {
-            questionContainer.innerHTML += "<button onclick='checkAnswer(" + i + ")'>" + options[i] + "</button>";
-          }
-        }
-      };
-
-      xhr.open("GET", "/game?languageId=" + languageId + "&categoryId=" + categoryId + "&questionIndex=" + currentQuestionIndex, true);
-      xhr.send();
-    }
-
-
-    function checkAnswer(optionIndex) {
-      // Check if the selected option is correct
-      if (optionIndex === correctAnswers[currentQuestionIndex]) {
-        alert("Correct!");
-      } else {
-        alert("Incorrect!");
-      }
-
-      // Move to the next question
-      currentQuestionIndex++;
-      if (currentQuestionIndex < questions.length) {
-        loadQuestion();
-      } else {
-        alert("End of the game!");
-      }
-    }
-
-    // Load the first question when the page loads
-    loadQuestion();
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Page</title>
+    <link rel="stylesheet" href="game.css">
 </head>
+
 <body>
-<div id="question-container">
-  <!-- The current question and options will be loaded here -->
-</div>
+    <h1 class="jeopardy-header">JEOPARODY!</h1>
+
+    <div class="container">
+        <div class="image-container">
+            <img id="media" class="media" src="" alt="Question Image">
+            <img class="vintage-tv" src="old-tv.png" alt="Overlay TV">
+        </div>
+    </div>
+
+    <div style="display: flex; justify-content: center; align-items: center; color: white;">
+        <h2 id="question"></h2>
+    </div>
+
+    <div class="button-container">
+        <button class="button" onclick="prevQuestion()">Previous</button>
+        <button class="button" onclick="nextQuestion()">Next</button>
+    </div>
+
+    <div class="empty-squares">
+    </div>
+
+    <div class="score" id="score">Score: 0</div>
+    
+    <div class="question-container">
+            <div class="question">
+                <h2 id="option1" onclick="checkAnswer(0)">Spongebob Squarepants</h2>
+            </div>
+            <div class="question">
+                <h2 id="option2" onclick="checkAnswer(1)">Monkey D. Luffy</h2>
+            </div>
+            <div class="question">
+                <h2 id="option3" onclick="checkAnswer(2)">Naruto Uzumaki</h2>
+            </div>
+            <div class="question">
+                <h2 id="option4" onclick="checkAnswer(3)">Drake "@champagnepapi" Graham</h2>
+            </div>
+    </div>
+
+    <script src="game.js"></script>
 </body>
+
 </html>

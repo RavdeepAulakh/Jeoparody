@@ -10,21 +10,25 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.JsonArray;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+import javax.json.Json;
+import com.google.gson.JsonObject;
+
 public class GameServlet extends HttpServlet {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/jeoparody";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/jeoparody5";
     private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "hockey04";
+    private static final String DB_PASSWORD = "";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        response.setContentType("text/html");
+        response.setContentType("application/json");
         PrintWriter out = response.getWriter();
 
         HttpSession session = request.getSession();
@@ -37,9 +41,10 @@ public class GameServlet extends HttpServlet {
         int categoryId = Integer.parseInt(request.getParameter("categoryId"));
 
         // Retrieve questions and options based on language and category
-        List<String> questions = new ArrayList<>();
-        List<List<String>> optionsList = new ArrayList<>();
-        List<Integer> correctAnswers = new ArrayList<>();
+
+        JsonArray questionsArray = new JsonArray();
+        JsonArray allOptionsArray = new JsonArray(); // Parent array to hold all option arrays
+        JsonArray correctAnswersArray = new JsonArray();
 
         try {
             Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
@@ -57,7 +62,7 @@ public class GameServlet extends HttpServlet {
             ResultSet rs = pstmt.executeQuery();
 
             int currentQuestionId = -1;
-            List<String> currentOptions = new ArrayList<>();
+            JsonArray currentOptionsArray = null; // Using JsonArray for options
 
             while (rs.next()) {
                 int questionId = rs.getInt("question_id");
@@ -65,30 +70,32 @@ public class GameServlet extends HttpServlet {
                 String optionText = rs.getString("option_text");
                 boolean isCorrect = rs.getBoolean("is_correct");
 
-                System.out.println(questionId);
-                System.out.println(questionText);
-                System.out.println(optionText);
-                System.out.println(isCorrect);
-
                 if (currentQuestionId != questionId) {
-                    // New question, add it to the list
-                    questions.add(questionText);
+                    if (currentOptionsArray != null) {
+                        allOptionsArray.add(currentOptionsArray);
+                    }
 
-                    // Create a new list for options
-                    currentOptions = new ArrayList<>();
-                    optionsList.add(currentOptions);
+                    // New question, add it to the JsonArray
+                    questionsArray.add(questionText);
+
+                    // Create a new JsonArray for options
+                    currentOptionsArray = new JsonArray();
 
                     // Update the current question ID
                     currentQuestionId = questionId;
                 }
 
-                // Add the option to the current question's options list
-                currentOptions.add(optionText);
+                // Add the option to the current question's options JsonArray
+                currentOptionsArray.add(optionText);
 
                 if (isCorrect) {
-                    // Store the index of the correct answer relative to the current options list
-                    correctAnswers.add(currentOptions.size() - 1);
+                    correctAnswersArray.add(currentOptionsArray.size() - 1);
                 }
+            }
+
+            // After the loop, add the last optionsArray if it's not null
+            if (currentOptionsArray != null) {
+                allOptionsArray.add(currentOptionsArray);
             }
 
             conn.close();
@@ -96,16 +103,21 @@ public class GameServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        // Store the questions, options, and correct answers in the session
-        session.setAttribute("questions", questions);
-        session.setAttribute("optionsList", optionsList);
-        session.setAttribute("correctAnswers", correctAnswers);
+// Store the questions, options, and correct answers in the session
+        session.setAttribute("questions", questionsArray);
+        session.setAttribute("optionsList", allOptionsArray); // Store the parent array
+        session.setAttribute("correctAnswers", correctAnswersArray);
 
-        System.out.println(questions);
-        System.out.println(optionsList);
-        System.out.println(correctAnswers);
+        System.out.println(questionsArray);
+        System.out.println(allOptionsArray);
+        System.out.println(correctAnswersArray);
 
-        // Serve the game HTML page
-        request.getRequestDispatcher("/game.html").include(request, response);
+        JsonObject responseObject = new JsonObject();
+        responseObject.add("questions", questionsArray);
+        responseObject.add("optionsList", allOptionsArray);
+        responseObject.add("correctAnswers", correctAnswersArray);
+
+        out.print(responseObject.toString());
+        out.flush();
     }
 }

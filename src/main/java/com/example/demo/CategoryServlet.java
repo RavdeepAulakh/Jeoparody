@@ -13,9 +13,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class CategoryServlet extends HttpServlet {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/jeoparody";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/jeoparody5";
     private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "hockey04";
+    private static final String DB_PASSWORD = "";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -74,7 +74,7 @@ public class CategoryServlet extends HttpServlet {
         out.println("function selectCategory(categoryId) {");
         out.println("  var languageId = " + languageId + ";"); // Get the languageId from the current page
         out.println("  // Redirect to the GameServlet with the selected category and language IDs as parameters");
-        out.println("  window.location.href = 'game?languageId=' + languageId + '&categoryId=' + categoryId;");
+        out.println("window.location.href = 'display?languageId=' + languageId + '&categoryId=' + categoryId;");
         out.println("}");
         out.println("</script>");
 
