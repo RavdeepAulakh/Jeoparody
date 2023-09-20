@@ -21,6 +21,10 @@ public class CategoryServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
+
+        // Include the HTML content from category.html
+        request.getRequestDispatcher("/category.html").include(request, response);
+
         out.println("<html><head><title>Select Category</title></head><body>");
 
         // Get the language ID from the request, assuming it's passed as a parameter
@@ -54,7 +58,7 @@ public class CategoryServlet extends HttpServlet {
                 String categoryName = rs.getString("category_name");
 
                 // Create a button for each category
-                out.println("<button onclick=\"selectCategory(" + categoryId + ")\">" + categoryName + "</button><br>");
+                out.println("<div class=\"button\" onclick=\"selectCategory(" + categoryId + ")\">" + categoryName + "</div>");
             }
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
