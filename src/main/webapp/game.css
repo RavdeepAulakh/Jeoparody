@@ -10,6 +10,29 @@ body {
     width: 100vw;
 }
 
+.socket-container{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 350px;
+    height: 200px;
+}
+
+#socket-feed {
+    display: flex;
+    flex-direction: column;
+    width: 275px;
+}
+
+#socket-feed > p {
+    font-size: 10px;
+    overflow-wrap: break-word;
+    margin: 5px;
+    background-color: #0c1353;
+    color: white;
+}
+
+
 @font-face {
     font-family: 'Jeopardy';
     src: url('jeopardy.ttf') format('truetype')
