@@ -21,9 +21,9 @@ import javax.json.Json;
 import com.google.gson.JsonObject;
 
 public class GameServlet extends HttpServlet {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/jeoparody5";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/jeoparody";
     private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "";
+    private static final String DB_PASSWORD = "Kamloops_1";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
