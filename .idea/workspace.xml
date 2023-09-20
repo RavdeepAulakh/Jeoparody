@@ -10,13 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c590191b-4236-476e-a1b8-3caa707cb45b" name="Changes" comment="Added a simple login page you can reach">
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/SocketServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/SocketServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/game.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/game.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/game.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/game.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/socket.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/socket.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/game.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

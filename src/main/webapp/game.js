@@ -1,3 +1,6 @@
+//SOCKET CODE
+let message = '';
+
 const defaultImage = "old-tv-1.gif";
 let questions = [];
 let optionsList = [];
@@ -122,12 +125,18 @@ function checkAnswer(selectedOption) {
       answeredQuestions[currentQuestion] = "right";
       document.getElementById("option" + (selectedOption + 1)).style.color =
           "green";
+      //SOCKET CODE
+      message = "Correct answer."
+      webSocket.send(message);
     } else {
       answeredQuestions[currentQuestion] = "wrong";
       document.getElementById("option" + (selectedOption + 1)).style.color =
           "red";
       document.getElementById("option" + (correctIndex + 1)).style.color =
           "green";
+      //SOCKET CODE
+      message = "Incorrect answer."
+
     }
 
     document.getElementById("score").textContent = "Score: " + score;
