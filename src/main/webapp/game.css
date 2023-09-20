@@ -21,13 +21,13 @@ body {
 #socket-feed {
     display: flex;
     flex-direction: column;
-    width: 275px;
 }
 
 #socket-feed > p {
     font-size: 10px;
+    padding: 10px;
+    border-radius: 15px;
     overflow-wrap: break-word;
-    margin: 5px;
     background-color: #0c1353;
     color: white;
 }

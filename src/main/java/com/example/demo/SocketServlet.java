@@ -16,7 +16,7 @@ public class SocketServlet {
     public void onOpen(Session session) {
         sessions.add(session);
         System.out.println("Socket session added"); // Console debugger
-        onMessage("Session added", session);
+        onMessage("\nSession added", session);
     }
 
     @OnMessage
@@ -24,8 +24,8 @@ public class SocketServlet {
         for (Session s : sessions) {
             if (s.isOpen()) {
                 try {
-                    s.getBasicRemote().sendText("From: " + session);
-                    s.getBasicRemote().sendText(message);
+                    s.getBasicRemote().sendText("From: " + session + "\n\n"+message);
+                    //s.getBasicRemote().sendText(message);
                     System.out.println("Message broadcasted");
                 } catch (IOException e) {
                     e.printStackTrace();

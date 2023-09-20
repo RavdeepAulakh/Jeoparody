@@ -136,6 +136,7 @@ function checkAnswer(selectedOption) {
           "green";
       //SOCKET CODE
       message = "Incorrect answer."
+      webSocket.send(message);
 
     }
 
