@@ -21,7 +21,9 @@ public class LanguageServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        out.println("<html><head><title>Select Language</title></head><body>");
+
+        // Include the HTML content from language.html
+        request.getRequestDispatcher("/language.html").include(request, response);
 
         Connection conn = null;
         Statement stmt = null;
@@ -44,7 +46,7 @@ public class LanguageServlet extends HttpServlet {
                 String name = rs.getString("language_name");
 
                 // Create a button for each language
-                out.println("<button onclick=\"selectLanguage(" + id + ")\">" + name + "</button><br>");
+                out.println("<div class=\"button\" onclick=\"selectLanguage(" + id + ")\">" + name + "</div>");
             }
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
@@ -60,13 +62,12 @@ public class LanguageServlet extends HttpServlet {
         }
 
         // JavaScript function to handle button click
+//        out.println("<script src=\"language.js\"></script>");
         out.println("<script>");
         out.println("function selectLanguage(languageId) {");
         out.println("  // Redirect to the CategoryServlet with the selected language ID as a parameter");
         out.println("  window.location.href = 'categories?languageId=' + languageId;");
         out.println("}");
         out.println("</script>");
-
-        out.println("</body></html>");
     }
 }
