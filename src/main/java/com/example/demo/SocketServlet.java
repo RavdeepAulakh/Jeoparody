@@ -24,7 +24,7 @@ public class SocketServlet {
         for (Session s : sessions) {
             if (s.isOpen()) {
                 try {
-                    s.getBasicRemote().sendText("From: " + session + "\n\n"+message);
+                    s.getBasicRemote().sendText("User: " + session + "\n\n"+ message);
                     //s.getBasicRemote().sendText(message);
                     System.out.println("Message broadcasted");
                 } catch (IOException e) {

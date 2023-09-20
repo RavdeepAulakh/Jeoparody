@@ -139,8 +139,13 @@ function checkAnswer(selectedOption) {
       webSocket.send(message);
 
     }
-
+    //SOCKET CODE
+    // Reset message contents to socket
+      // Do this in order to send score
+    message = '';
     document.getElementById("score").textContent = "Score: " + score;
+    message = document.getElementById("score").textContent = "Score: " + score;
+    webSocket.send(message);
     updateImage();
   }
 }
