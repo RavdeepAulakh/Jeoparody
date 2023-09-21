@@ -13,5 +13,5 @@ Other:
             - lines 153-156
             - lines 160-162
 
-- game.css
+- game.css (designated with /* SOCKET CODE */)
     - lines 13-37
