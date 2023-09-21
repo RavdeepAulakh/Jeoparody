@@ -1,4 +1,5 @@
 //SOCKET CODE
+  // Initialize variable to hold message to SocketServlet.java
 let message = '';
 
 const defaultImage = "old-tv-1.gif";
@@ -153,9 +154,13 @@ function checkAnswer(selectedOption) {
     // Reset message contents to socket
       // Do this in order to send score
     message = '';
+
     document.getElementById("score").textContent = "Score: " + score;
+
+    // SOCKET CODE
     message = document.getElementById("score").textContent = "Score: " + score;
     webSocket.send(message);
+
     updateImage();
   }
 }
