@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JEOPARODY</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        .category-buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .category-buttons button {
+            margin: 5px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="center-container">
+    <div class="title">JEOPARODY</div>
+    <div class="category-buttons">
+        <!-- Category buttons will be added dynamically using JavaScript -->
+    </div>
+</div>
+
+<script>
+    // webapp/category.js
+    function selectCategory(categoryId) {
+        // Redirect to the GameServlet with the selected category ID as a parameter
+        window.location.href = 'display?categoryId=' + categoryId;
+    }
+</script>
+</body>
+</html>
