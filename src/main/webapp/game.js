@@ -45,6 +45,7 @@ function displayQuestion() {
     const option3Element = document.getElementById("option3");
     const option4Element = document.getElementById("option4");
 
+
     // Reset colors
     option1Element.style.color = "white";
     option2Element.style.color = "white";
@@ -64,7 +65,20 @@ function displayQuestion() {
     option3Element.textContent = optionsList[currentQuestion][2];
     option4Element.textContent = optionsList[currentQuestion][3];
 
+
     updateImage();
+
+    if (answeredQuestions[currentQuestion]) {
+        const answerStatus = answeredQuestions[currentQuestion].status;
+        const answerOption = answeredQuestions[currentQuestion].option;
+
+        if (answerStatus === "right") {
+            document.getElementById("option" + (answerOption + 1)).style.color = "green";
+        } else if (answerStatus === "wrong") {
+            document.getElementById("option" + (answerOption + 1)).style.color = "red";
+            document.getElementById("option" + (correctAnswers[currentQuestion] + 1)).style.color = "green";
+        }
+    }
 
 }
 
@@ -97,18 +111,18 @@ function generateSquares() {
 }
 
 function UpdateSquare() {
-  const emptySquares = document.querySelectorAll(".empty-square");
-  for (let i = 0; i < emptySquares.length; i++) {
-    if (i === currentQuestion) {
-      emptySquares[i].style.backgroundColor = "blue";
-    } else if (answeredQuestions[i] === "right") {
-      emptySquares[i].style.backgroundColor = "green";
-    } else if (answeredQuestions[i] === "wrong") {
-      emptySquares[i].style.backgroundColor = "red";
-    } else {
-      emptySquares[i].style.backgroundColor = "darkgray";
+    const emptySquares = document.querySelectorAll(".empty-square");
+    for (let i = 0; i < emptySquares.length; i++) {
+        if (i === currentQuestion) {
+            emptySquares[i].style.backgroundColor = "blue";
+        } else if (answeredQuestions[i] && answeredQuestions[i].status === "right") {
+            emptySquares[i].style.backgroundColor = "green";
+        } else if (answeredQuestions[i] && answeredQuestions[i].status === "wrong") {
+            emptySquares[i].style.backgroundColor = "red";
+        } else {
+            emptySquares[i].style.backgroundColor = "darkgray";
+        }
     }
-  }
 }
 
 function checkAnswer(selectedOption) {
@@ -127,15 +141,12 @@ function checkAnswer(selectedOption) {
 
     if (selectedOption === correctIndex) {
       score++;
-      answeredQuestions[currentQuestion] = "right";
-      document.getElementById("option" + (selectedOption + 1)).style.color =
-          "green";
+        answeredQuestions[currentQuestion] = { status: "right", option: selectedOption };
+        document.getElementById("option" + (selectedOption + 1)).style.color = "green";
     } else {
-      answeredQuestions[currentQuestion] = "wrong";
-      document.getElementById("option" + (selectedOption + 1)).style.color =
-          "red";
-      document.getElementById("option" + (correctIndex + 1)).style.color =
-          "green";
+        answeredQuestions[currentQuestion] = { status: "wrong", option: selectedOption };
+        document.getElementById("option" + (selectedOption + 1)).style.color = "red";
+        document.getElementById("option" + (correctIndex + 1)).style.color = "green";
     }
 
     document.getElementById("score").textContent = "Score: " + score;
