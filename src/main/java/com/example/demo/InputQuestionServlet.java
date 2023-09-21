@@ -55,6 +55,7 @@ public class InputQuestionServlet extends HttpServlet{
         Part filePart = request.getPart("image");
         String imageCaption = request.getParameter("imageCaption");
         String category = request.getParameter("categories");
+        String language = request.getParameter("languages");
         String question = request.getParameter("question");
         String option1 = request.getParameter("option1");
         String option2 = request.getParameter("option2");
@@ -76,6 +77,7 @@ public class InputQuestionServlet extends HttpServlet{
         }
         try {
             int catID = 1;
+            int languageID = 1;
             switch (category) {
                 case "famouspeople":
                     catID = 1;
@@ -93,18 +95,31 @@ public class InputQuestionServlet extends HttpServlet{
                     catID = 5;
                     break;
             }
+            switch (language) {
+                case "english":
+                    languageID = 1;
+                    break;
+                case "spanish":
+                    languageID = 2;
+                    break;
+                case "french":
+                    languageID = 3;
+                    break;
+            }
+
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jeoparody", "root", "131599Jalopy!");
-            PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO Questions (category_id, question_text, video_url, audio_url, image_location_data, image_caption) VALUES (?,?,?,?,?,?)");
+            PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO Questions (category_id, language_id, question_text, video_url, audio_url, image_location_data, image_caption) VALUES (?,?,?,?,?,?,?)");
 //            UUID uuid = UUID.randomUUID();
             // if image is null (meaning its url or neither)
             // if url is null (meaning its image)
             // else set image and url to null
             preparedStatement.setInt(1, catID);
-            preparedStatement.setString(2, question);
-            preparedStatement.setString(3, video);
-            preparedStatement.setString(4, audio);
-            preparedStatement.setString(5, "image/" + fileName);
-            preparedStatement.setString(6, imageCaption);
+            preparedStatement.setInt(2, languageID);
+            preparedStatement.setString(3, question);
+            preparedStatement.setString(4, video);
+            preparedStatement.setString(5, audio);
+            preparedStatement.setString(6, "image/" + fileName);
+            preparedStatement.setString(7, imageCaption);
 //            preparedStatement.setBinaryStream(7, filePart.getInputStream());
             int row = preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -139,49 +154,5 @@ public class InputQuestionServlet extends HttpServlet{
                 System.out.println("");
             }
         }
-//        byte bArr[] = null;
-//        UUID sid = null;
-//        try {
-//            Statement stmt2 = con.createStatement( );
-//            ResultSet rs = stmt2.executeQuery("SELECT id, question, contentpath, content FROM trivias");
-//            rs.next();
-//            byte[] raw = rs.getBytes(1);
-//            sid  = asUuid(raw);
-//            question = rs.getString(2);
-//            String contentPath = rs.getString(3);
-//            Blob b = rs.getBlob(4);
-//            bArr = b.getBytes(1, (int) b.length());
-//            stmt2.close();
-//            con.close();
-//        } catch(SQLException ex3) {
-//            while (ex3 != null) {
-//                System.out.println("Message: " + ex3.getMessage ());
-//                System.out.println("SQLState: " + ex3.getSQLState ());
-//                System.out.println("ErrorCode: " + ex3.getErrorCode ());
-//                ex3 = ex3.getNextException();
-//                System.out.println("");
-//            }
-//        }
-//        response.setContentType("text/html");
-//        PrintWriter out = response.getWriter();
-//        String page = "<!DOCTYPE html><html><body>" +
-//                "<img src=\"data:image/jpeg;base64," +
-//                Base64.getEncoder().encodeToString(bArr) + "\"" +
-//                " width=\"500\" height=\"500\"></img>" +
-//                "</body></html>";
-//        System.out.println(page);
-//        out.println(page);
     }
-//    public static byte[] asBytes(UUID uuid) {
-//        ByteBuffer bb = ByteBuffer.wrap(new byte[16]);
-//        bb.putLong(uuid.getMostSignificantBits());
-//        bb.putLong(uuid.getLeastSignificantBits());
-//        return bb.array();
-//    }
-//    public static UUID asUuid(byte[] bytes) {
-//        ByteBuffer bb = ByteBuffer.wrap(bytes);
-//        long firstLong = bb.getLong();
-//        long secondLong = bb.getLong();
-//        return new UUID(firstLong, secondLong);
-//    }
 }
