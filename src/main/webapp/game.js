@@ -37,11 +37,8 @@ function fetchDataFromServlet(languageId, categoryId) {
 
 
 function displayQuestion() {
-  if (
-      questions[currentQuestion] &&
-      optionsList[currentQuestion] &&
-      correctAnswers[currentQuestion]
-  ) {
+
+
     const questionElement = document.getElementById("question");
     const option1Element = document.getElementById("option1");
     const option2Element = document.getElementById("option2");
@@ -68,7 +65,7 @@ function displayQuestion() {
     option4Element.textContent = optionsList[currentQuestion][3];
 
     updateImage();
-  }
+
 }
 
 function updateImage() {
@@ -115,6 +112,7 @@ function UpdateSquare() {
 }
 
 function checkAnswer(selectedOption) {
+
   if (
       questions[currentQuestion] &&
       correctAnswers[currentQuestion] !== undefined
@@ -143,6 +141,7 @@ function checkAnswer(selectedOption) {
     document.getElementById("score").textContent = "Score: " + score;
     updateImage();
   }
+
 }
 
 function nextQuestion() {
