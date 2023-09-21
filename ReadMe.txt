@@ -12,3 +12,6 @@ Other:
             - lines 148-150
             - lines 153-156
             - lines 160-162
+
+- game.css
+    - lines 13-37

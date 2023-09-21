@@ -10,6 +10,7 @@ body {
     width: 100vw;
 }
 
+/* SOCKET CODE */
 .socket-container{
     position: absolute;
     top: 10px;
@@ -33,7 +34,7 @@ body {
     background-color: #0c1353;
     color: white;
 }
-
+/* END OF SOCKET CODE */
 
 @font-face {
     font-family: 'Jeopardy';
