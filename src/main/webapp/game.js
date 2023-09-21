@@ -5,6 +5,7 @@ let correctAnswers = [];
 let currentQuestion = 0;
 let score = 0;
 let answeredQuestions = [];
+let imageList = [];
 
 let urlParams = new URLSearchParams(window.location.search);
 let languageId = urlParams.get('languageId');
@@ -14,10 +15,15 @@ function fetchDataFromServlet(languageId, categoryId) {
   fetch(`/demo_war_exploded/game?languageId=${languageId}&categoryId=${categoryId}`)
       .then(response => response.json())
       .then(data => {
+
+        console.log(data);
         // Use the fetched data here. For instance:
         questions = data.questions;
         optionsList = data.optionsList;
         correctAnswers = data.correctAnswers;
+        imageList = data.images.map(imageUrl => {
+          return `/demo_war_exploded${imageUrl}`;
+        });
 
         // Call the function to start the quiz after fetching the data
         displayQuestion();
@@ -68,12 +74,16 @@ function displayQuestion() {
 function updateImage() {
   const imageElement = document.getElementById("media");
 
-  if (answeredQuestions[currentQuestion]) {
-    imageElement.src = questions[currentQuestion].image;
+  if (
+      answeredQuestions[currentQuestion] &&
+      imageList[currentQuestion]
+  ) {
+    imageElement.src = imageList[currentQuestion];
   } else {
     imageElement.src = defaultImage;
   }
 }
+
 
 function generateSquares() {
   const squaresContainer = document.querySelector(".empty-squares");
