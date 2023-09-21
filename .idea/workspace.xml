@@ -9,12 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c590191b-4236-476e-a1b8-3caa707cb45b" name="Changes" comment="Added a simple login page you can reach">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/SocketServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/SocketServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/game.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/game.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/game.js" afterDir="false" />
-    </list>
+    <list default="true" id="c590191b-4236-476e-a1b8-3caa707cb45b" name="Changes" comment="Added a simple login page you can reach" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -140,7 +135,7 @@
       <option name="presentableId" value="Default" />
       <updated>1694650728637</updated>
       <workItem from="1694650729623" duration="2708000" />
-      <workItem from="1695252086158" duration="1255000" />
+      <workItem from="1695252086158" duration="1306000" />
     </task>
     <task id="LOCAL-00001" summary="First commit">
       <option name="closed" value="true" />
