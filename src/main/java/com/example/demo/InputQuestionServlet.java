@@ -1,24 +1,16 @@
 package com.example.demo;
 
-import jakarta.servlet.http.*;
-import jakarta.servlet.*;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
-import jakarta.servlet.http.Part;
-import java.sql.*;
+import jakarta.servlet.http.*;
+
 import java.io.*;
-import java.time.LocalDate;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
-import java.lang.StringBuilder;
-import java.util.Base64;
-import java.util.Date;
-import java.util.UUID;
-import java.text.*;
 import java.nio.*;
+import java.sql.*;
+import java.text.*;
 
 @MultipartConfig
 public class InputQuestionServlet extends HttpServlet{
@@ -70,12 +62,12 @@ public class InputQuestionServlet extends HttpServlet{
         String fileName = filePart.getSubmittedFileName();
         if(question.equals("")) question = "No Question";
         System.out.println(">>>>>" + imageCaption + category + question + option1 + option2 + option3 + option4 + fileName);
-        Connection con = null;
+//        Connection con = null;
         try {Class.forName("com.mysql.cj.jdbc.Driver"); } catch (Exception ex) {
             System.out.println("Message: " + ex.getMessage ());
             return;
         }
-        try {
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jeoparody", "root", "131599Jalopy!")) {
             int catID = 1;
             int languageID = 1;
             switch (category) {
@@ -107,50 +99,53 @@ public class InputQuestionServlet extends HttpServlet{
                     break;
             }
 
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jeoparody", "root", "131599Jalopy!");
-            PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO Questions (category_id, language_id, question_text, video_url, audio_url, image_location_data, image_caption) VALUES (?,?,?,?,?,?,?)");
-//            UUID uuid = UUID.randomUUID();
-            // if image is null (meaning its url or neither)
-            // if url is null (meaning its image)
-            // else set image and url to null
-            preparedStatement.setInt(1, catID);
-            preparedStatement.setInt(2, languageID);
-            preparedStatement.setString(3, question);
-            preparedStatement.setString(4, video);
-            preparedStatement.setString(5, audio);
-            preparedStatement.setString(6, "image/" + fileName);
-            preparedStatement.setString(7, imageCaption);
+            try (PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO Questions(category_id, language_id, question_text, image_location_data) VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS)) {
+                //            UUID uuid = UUID.randomUUID();
+                // if image is null (meaning its url or neither)
+                // if url is null (meaning its image)
+                // else set image and url to null
+                preparedStatement.setInt(1, catID);
+                preparedStatement.setInt(2, languageID);
+                preparedStatement.setString(3, question);
+                preparedStatement.setString(4, "images/" + fileName);
 //            preparedStatement.setBinaryStream(7, filePart.getInputStream());
-            int row = preparedStatement.executeUpdate();
-            preparedStatement.close();
-            //con.close();
+                int row = preparedStatement.executeUpdate();
+                int questionID = -1;
+                ResultSet rs = preparedStatement.getGeneratedKeys();
+                if (rs.next()) {
+                    questionID = rs.getInt(1);
+                }
+                preparedStatement.close();
+
+                if (questionID != -1) {
+                    String[] optionText = { option1, option2, option3, option4 };
+                    boolean[] optionValues = {option1Correct, option2Correct, option3Correct, option4Correct};
+                    for (int i = 0; i < optionText.length; i++) {
+                        PreparedStatement optionStatement = con.prepareStatement("INSERT INTO Options (question_id, option_text, is_correct) VALUES (?,?,?)");
+                        optionStatement.setInt(1, questionID);
+                        optionStatement.setString(2,optionText[i]);
+                        optionStatement.setBoolean(3, optionValues[i]);
+                        row = optionStatement.executeUpdate();
+                        optionStatement.close();
+                    }
+                }
+                //con.close();
+            } catch(SQLException ex) {
+                while (ex != null) {
+                    System.out.println("Message: " + ex.getMessage ());
+                    System.out.println("SQLState: " + ex.getSQLState ());
+                    System.out.println("ErrorCode: " + ex.getErrorCode ());
+                    ex = ex.getNextException();
+                    System.out.println("");
+                }
+            }
+
         } catch(SQLException ex) {
             while (ex != null) {
                 System.out.println("Message: " + ex.getMessage ());
                 System.out.println("SQLState: " + ex.getSQLState ());
                 System.out.println("ErrorCode: " + ex.getErrorCode ());
                 ex = ex.getNextException();
-                System.out.println("");
-            }
-        }
-        try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jeoparody", "root", "131599Jalopy!");
-            String[] optionText = { option1, option2, option3, option4 };
-            boolean[] optionValues = {option1Correct, option2Correct, option3Correct, option4Correct};
-            for (int i = 0; i < optionText.length; i++) {
-                PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO Options (option_text, is_correct) VALUES (?,?)");
-                preparedStatement.setString(1,optionText[i]);
-                preparedStatement.setBoolean(2, optionValues[i]);
-                int row = preparedStatement.executeUpdate();
-                preparedStatement.close();
-            }
-            //con.close();
-        } catch(SQLException ex2) {
-            while (ex2 != null) {
-                System.out.println("Message: " + ex2.getMessage ());
-                System.out.println("SQLState: " + ex2.getSQLState ());
-                System.out.println("ErrorCode: " + ex2.getErrorCode ());
-                ex2 = ex2.getNextException();
                 System.out.println("");
             }
         }
