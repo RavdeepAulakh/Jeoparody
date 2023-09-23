@@ -193,4 +193,11 @@ function prevQuestion() {
   }
 }
 
+function differentCategory() {
+    const url = `/demo_war_exploded/categories?languageId=${languageId}`;
+    console.log("Redirecting to URL: ", url); // Log the URL to the console
+    window.location.href = url;
+}
+
+
 fetchDataFromServlet(languageId, categoryId);
