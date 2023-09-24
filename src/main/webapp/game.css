@@ -28,7 +28,7 @@ body {
 
 /* Hidden socket feed parent element */
 /* This parent element is used to prepend messages before it */
-#parentElement {
+.hidden {
     display: none;
 }
 
