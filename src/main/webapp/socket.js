@@ -18,5 +18,6 @@ webSocket.onmessage = function(e) {
     socketItem.appendChild(document.createTextNode(message));
 
     // Append the p element with message text to the socket feed
-    socketFeed.appendChild(socketItem);
+    //socketFeed.appendChild(socketItem);
+    socketFeed.insertBefore(socketItem, socketFeed.firstChild);
 }

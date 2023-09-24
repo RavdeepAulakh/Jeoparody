@@ -17,12 +17,19 @@ body {
     right: 10px;
     width: 350px;
     height: 200px;
+    overflow: hidden;
 }
 
 #socket-feed {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+}
+
+/* Hidden socket feed parent element */
+/* This parent element is used to prepend messages before it */
+#parentElement {
+    display: none;
 }
 
 /* SOCKET P ELEMENTS */
