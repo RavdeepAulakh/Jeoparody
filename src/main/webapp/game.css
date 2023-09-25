@@ -159,6 +159,7 @@ body {
 
 .next-button {
     order: 2; /* Set the order to 2 for the Next button */
+    align-self: flex-start;
 }
 
 .empty-squares {

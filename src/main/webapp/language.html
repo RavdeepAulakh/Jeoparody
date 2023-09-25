@@ -19,6 +19,15 @@
             border: none;
             cursor: pointer;
         }
+
+        .menu-button {
+            dmargin: 5px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -29,10 +38,16 @@
     </div>
 </div>
 
+<button class="menu-button" onclick="backToMainMenu()">Back to Main Menu</button>
+
 <script>
     function selectLanguage(languageId) {
         // Redirect to the CategoryServlet with the selected language ID as a parameter
         window.location.href = 'categories?languageId=' + languageId;
+    }
+
+    function backToMainMenu() {
+        window.location.href = 'index.html';
     }
 </script>
 </body>

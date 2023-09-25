@@ -21,22 +21,36 @@
             cursor: pointer;
         }
 
+        .menu-button {
+            margin: 5px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
 
 <div class="center-container">
     <div class="title">JEOPARODY</div>
+    <button class="menu-button" onclick="backToMainMenu()">Back to Main Menu</button>
     <div class="category-buttons">
         <!-- Category buttons will be added dynamically using JavaScript -->
     </div>
 </div>
+
 
 <script>
     // webapp/category.js
     function selectCategory(categoryId) {
         // Redirect to the GameServlet with the selected category ID as a parameter
         window.location.href = 'display?categoryId=' + categoryId;
+    }
+
+    function backToMainMenu() {
+        window.location.href = 'index.html';
     }
 </script>
 </body>
