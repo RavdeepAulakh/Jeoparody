@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit Question</title>
+    <link rel="stylesheet" type="text/css" href="submit.css">
+
+</head>
+<body>
+  <h1>Submit your question!</h1>
+  <form method="POST" action="upload" enctype="multipart/form-data">
+
+    <div id="imageOptions">
+      <label for="img">Upload your image</label>
+      <input type="file" name="image" id="img">
+      <label for="caption">Provide a caption for your image</label>
+      <input type="text" name="imageCaption" id="caption">
+    </div>
+
+    <label for="categories">Choose a category:</label>
+    <select id="categories" name="categories">
+      <option value="famouspeople">Famous People</option>
+      <option value="carmodels">Car Models</option>
+      <option value="history">History Moments</option>
+      <option value="fashion">Fashion</option>
+      <option value="music">Music</option>
+    </select>
+
+    <label for="languages">Choose a language:</label>
+    <select id="languages" name="languages">
+      <option value="english">English</option>
+      <option value="spanish">Spanish</option>
+      <option value="french">French</option>
+    </select>
+
+    <label for="question">Question: </label>
+    <input type="text" name="question" id="question">
+
+    <label for="option1"> Option 1 (True) </label>
+    <input type="text" name="option1" id="option1">
+    <input type="hidden" name="option1_correct" value="true">
+
+    <label for="option2"> Option 2 (False) </label>
+    <input type="text" name="option2" id="option2">
+    <input type="hidden" name="option2_correct" value="false">
+
+    <label for="option3"> Option 3 (False) </label>
+    <input type="text" name="option3" id="option3">
+    <input type="hidden" name="option3_correct" value="false">
+
+    <label for="option4"> Option 4 (False) </label>
+    <input type="text" name="option4" id="option4">
+    <input type="hidden" name="option4_correct" value="false">
+
+    <input type="submit" value="Submit">
+  </form>
+
+  <script src="submit.js"></script>
+
+</body>
+</html>
