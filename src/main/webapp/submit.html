@@ -3,27 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Submit Question</title>
+    <link rel="stylesheet" type="text/css" href="submit.css">
+
 </head>
 <body>
   <h1>Submit your question!</h1>
   <form method="POST" action="upload" enctype="multipart/form-data">
-    <input type="radio" name="mediaType" value="image" id="imageRadio"> Image
-    <input type="radio" name="mediaType" value="video" id="videoRadio"> Video/Audio
 
-    <div id="imageOptions" style="display: none;">
-      <input type="file" name="image">
-      <input type="text" name="imageCaption">
-    </div>
-
-    <div id="videoOptions" style="display: none;">
-      <input type="radio" name="mediaType" value="vid" id="vidRadio"> Video
-      <input type="radio" name="mediaType" value="aud" id="audRadio"> Audio
-      <input type="url" name="video" style="display: none;" id="video-input">
-      <input type="url" name="audio" style="display: none;"id="audio-input">
+    <div id="imageOptions">
+      <label for="img">Upload your image</label>
+      <input type="file" name="image" id="img">
+      <label for="caption">Provide a caption for your image</label>
+      <input type="text" name="imageCaption" id="caption">
     </div>
 
     <label for="categories">Choose a category:</label>
-    <select id="categories" name="categories" size="5">
+    <select id="categories" name="categories">
       <option value="famouspeople">Famous People</option>
       <option value="carmodels">Car Models</option>
       <option value="history">History Moments</option>
@@ -32,62 +27,35 @@
     </select>
 
     <label for="languages">Choose a language:</label>
-    <select id="languages" name="languages" size="3">
+    <select id="languages" name="languages">
       <option value="english">English</option>
       <option value="spanish">Spanish</option>
       <option value="french">French</option>
     </select>
 
-    <input type="text" name="question">
-    <input type="text" name="option1">
+    <label for="question">Question: </label>
+    <input type="text" name="question" id="question">
+
+    <label for="option1"> Option 1 (True) </label>
+    <input type="text" name="option1" id="option1">
     <input type="hidden" name="option1_correct" value="true">
-    <input type="text" name="option2">
+
+    <label for="option2"> Option 2 (False) </label>
+    <input type="text" name="option2" id="option2">
     <input type="hidden" name="option2_correct" value="false">
-    <input type="text" name="option3">
+
+    <label for="option3"> Option 3 (False) </label>
+    <input type="text" name="option3" id="option3">
     <input type="hidden" name="option3_correct" value="false">
-    <input type="text" name="option4">
+
+    <label for="option4"> Option 4 (False) </label>
+    <input type="text" name="option4" id="option4">
     <input type="hidden" name="option4_correct" value="false">
+
     <input type="submit" value="Submit">
   </form>
 
-  <script>
-    const imageRadio = document.getElementById("imageRadio");
-    const videoRadio = document.getElementById("videoRadio");
-    const imageOptions = document.getElementById("imageOptions");
-    const videoOptions = document.getElementById("videoOptions");
-    const vidRadio = document.getElementById("vidRadio");
-    const audRadio = document.getElementById("audRadio");
-    const videoInput = document.getElementById("video-input");
-    const audioInput = document.getElementById("audio-input");
-
-    imageRadio.addEventListener("change", function() {
-      if (imageRadio.checked) {
-        imageOptions.style.display = "block";
-        videoOptions.style.display = "none";
-      }
-    });
-
-    videoRadio.addEventListener("change", function() {
-      if (videoRadio.checked) {
-        imageOptions.style.display = "none";
-        videoOptions.style.display = "block";
-      }
-    });
-
-    vidRadio.addEventListener("change", function() {
-      if(vidRadio.checked) {
-        audioInput.style.display = "none";
-        videoInput.style.display =  "block";
-      }
-    });
-
-    audRadio.addEventListener("change", function() {
-      if(audioInput.checked) {
-        videoInput.style.display = "none";
-        audioInput.style.display = "block";
-      }
-    });
-  </script>
+  <script src="submit.js"></script>
 
 </body>
 </html>

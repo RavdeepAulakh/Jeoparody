@@ -57,8 +57,6 @@ public class InputQuestionServlet extends HttpServlet{
         boolean option2Correct = Boolean.parseBoolean(request.getParameter("option2_correct"));
         boolean option3Correct = Boolean.parseBoolean(request.getParameter("option3_correct"));
         boolean option4Correct = Boolean.parseBoolean(request.getParameter("option4_correct"));
-        String video = request.getParameter("video");
-        String audio = request.getParameter("audio");
         String fileName = filePart.getSubmittedFileName();
         if(question.equals("")) question = "No Question";
         System.out.println(">>>>>" + imageCaption + category + question + option1 + option2 + option3 + option4 + fileName);
@@ -67,7 +65,7 @@ public class InputQuestionServlet extends HttpServlet{
             System.out.println("Message: " + ex.getMessage ());
             return;
         }
-        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jeoparody", "root", "131599Jalopy!")) {
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jeoparody", "root", "")) {
             int catID = 1;
             int languageID = 1;
             switch (category) {
