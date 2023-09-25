@@ -108,5 +108,10 @@ function toggleButtons() {
     }
 }
 
+function setGameMode(mode) {
+    sessionStorage.setItem('gameMode', mode);
+
+}
+
 toggleButtons();
 

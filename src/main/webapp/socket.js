@@ -1,6 +1,3 @@
-
-// Set up variables to insert the languageId/categoryId into the url string
-
 // Create a socketURL depending on the users language/category selection
 const socketURL = "ws://localhost:8081/demo_war_exploded/game";
 console.log(socketURL);

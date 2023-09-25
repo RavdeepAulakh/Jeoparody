@@ -129,6 +129,7 @@ function UpdateSquare() {
     }
 }
 
+let gameMode = sessionStorage.getItem('gameMode');
 function checkAnswer(selectedOption) {
 
   if (
@@ -148,16 +149,19 @@ function checkAnswer(selectedOption) {
         answeredQuestions[currentQuestion] = { status: "right", option: selectedOption };
         document.getElementById("option" + (selectedOption + 1)).style.color = "green";
             //SOCKET CODE
-        message = "Correct answer."
-        webSocket.send(message);
+        if(gameMode == "multi"){
+            message = "Correct answer."
+            webSocket.send(message);
+        }
     } else {
         answeredQuestions[currentQuestion] = { status: "wrong", option: selectedOption };
         document.getElementById("option" + (selectedOption + 1)).style.color = "red";
         document.getElementById("option" + (correctIndex + 1)).style.color = "green";
             //SOCKET CODE
-        message = "Incorrect answer."
-        webSocket.send(message);
-
+        if(gameMode == "multi") {
+            message = "Incorrect answer."
+            webSocket.send(message);
+        }
     }
     //SOCKET CODE
     // Reset message contents to socket
@@ -168,8 +172,9 @@ function checkAnswer(selectedOption) {
 
     // SOCKET CODE
     message = document.getElementById("score").textContent = "Score: " + score;
-    webSocket.send(message);
-
+    if(gameMode == "multi") {
+        webSocket.send(message);
+    }
     updateImage();
   }
 
@@ -192,5 +197,10 @@ function prevQuestion() {
     UpdateSquare();
   }
 }
+
+if(gameMode == "single") {
+    document.getElementById('socket-feed').style.display = 'none';
+}
+
 
 fetchDataFromServlet(languageId, categoryId);
