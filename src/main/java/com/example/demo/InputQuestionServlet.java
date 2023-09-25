@@ -19,26 +19,27 @@ public class InputQuestionServlet extends HttpServlet{
             throws ServletException, IOException {
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
-        PrintWriter out = response.getWriter();
         HttpSession session = request.getSession(false);
         if (session != null && session.getAttribute("USER_ID") != null) {
             // The session is valid, and the user is logged in
             String username = (String) session.getAttribute("USER_ID");
             // Your code for handling the authenticated user here
+            try (InputStream inputStream = getServletContext().getResourceAsStream("/submit.html")) {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                PrintWriter out = response.getWriter(); {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        out.println(line);
+                    }
+                }
+                reader.close();
+            }
         } else {
             // No valid session exists or the user is not logged in
             // You can handle this case as needed (e.g., redirect to the login page)
             response.sendRedirect("login");
         }
-        InputStream inputStream = getServletContext().getResourceAsStream("/submit.html");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
-        String line;
-        while ((line = reader.readLine()) != null) {
-            out.println(line);
-        }
-
-        reader.close();
     }
 
     @Override
