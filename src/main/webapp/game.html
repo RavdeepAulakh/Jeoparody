@@ -18,13 +18,6 @@
     JEOPARODY!
 </h1>
 
-<!-- Choose Category -->
-<div class="button-container">
-    <button class="button retro-button" onclick="differentCategory()">
-        Choose a different Category
-    </button>
-</div>
-
 <!-- Socket -->
 <div class="socket-container">
     <div id="socket-feed">
@@ -41,15 +34,15 @@
     </div>
 </div>
 
-<!-- Questions -->
-<div style="display: flex; justify-content: center; align-items: center; color: white;">
-    <h2 id="question"></h2>
-</div>
-
 <!-- Previous and Next Buttons -->
 <div class="button-container">
     <button class="button" onclick="prevQuestion()">Previous</button>
     <button class="button" onclick="nextQuestion()">Next</button>
+</div>
+
+<!-- Questions -->
+<div style="display: flex; justify-content: center; align-items: center; color: white;">
+    <h2 id="question"></h2>
 </div>
 
 <!-- Squares to show progress -->
@@ -72,6 +65,13 @@
     <div class="question">
         <h2 id="option4" onclick="checkAnswer(3)">Drake "@champagnepapi" Graham</h2>
     </div>
+</div>
+
+<!-- Choose Category -->
+<div class="button-container">
+    <button class="button" onclick="differentCategory()">
+        Change Category
+    </button>
 </div>
 
 <script src="game.js"></script>
