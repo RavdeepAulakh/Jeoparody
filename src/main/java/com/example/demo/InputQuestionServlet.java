@@ -66,7 +66,7 @@ public class InputQuestionServlet extends HttpServlet{
             System.out.println("Message: " + ex.getMessage ());
             return;
         }
-        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jeoparody", "root", "")) {
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jeoparody", "root", "Kamloops_1")) {
             int catID = 1;
             int languageID = 1;
             switch (category) {
