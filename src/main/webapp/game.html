@@ -8,60 +8,73 @@
     <link rel="stylesheet" href="game.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <h1 class="jeopardy-header">JEOPARODY!</h1>
-    <br><br><br><br>
-    <div class="button-container">
-        <button class="button retro-button" onclick="differentCategory()">Choose a different Category</button>
-    </div>
 
-    <div class="socket-container">
-        <div id="socket-feed">
-           <!-- Socket messages go here -->
-            <p id="parentElement" class="hidden"></p>
-        </div>
-    </div>
-    <div class="container">
-        <div class="image-container">
-            <img id="media" class="media" src="" alt="Question Image">
-            <img class="vintage-tv" src="old-tv.png" alt="Overlay TV">
-        </div>
-    </div>
+<!-- Header -->
+<h1 class="jeopardy-header">
+    JEOPARODY!
+</h1>
 
-    <div style="display: flex; justify-content: center; align-items: center; color: white;">
-        <h2 id="question"></h2>
-    </div>
+<br><br><br><br>
 
-    <div class="button-container">
-        <button class="button" onclick="prevQuestion()">Previous</button>
-        <button class="button" onclick="nextQuestion()">Next</button>
-    </div>
+<!-- Choose Category -->
+<div class="button-container">
+    <button class="button retro-button" onclick="differentCategory()">Choose a different Category</button>
+</div>
 
-    <div class="empty-squares">
+<!-- Socket -->
+<div class="socket-container">
+    <div id="socket-feed">
+        <!-- Socket messages go here -->
+        <p id="parentElement" class="hidden"></p>
     </div>
+</div>
 
-    <div class="score" id="score">Score: 0</div>
-    
-    <div class="question-container">
-            <div class="question">
-                <h2 id="option1" onclick="checkAnswer(0)">Spongebob Squarepants</h2>
-            </div>
-            <div class="question">
-                <h2 id="option2" onclick="checkAnswer(1)">Monkey D. Luffy</h2>
-            </div>
-            <div class="question">
-                <h2 id="option3" onclick="checkAnswer(2)">Naruto Uzumaki</h2>
-            </div>
-            <div class="question">
-                <h2 id="option4" onclick="checkAnswer(3)">Drake "@champagnepapi" Graham</h2>
-            </div>
+<!-- TV -->
+<div class="container">
+    <div class="image-container">
+        <img id="media" class="media" src="" alt="Question Image">
+        <img class="vintage-tv" src="old-tv.png" alt="Overlay TV">
     </div>
+</div>
 
-    <script src="game.js"></script>
-    <script src="socket.js"></script>
+<!-- Questions -->
+<div style="display: flex; justify-content: center; align-items: center; color: white;">
+    <h2 id="question"></h2>
+</div>
+
+<!-- Previous and Next Buttons -->
+<div class="button-container">
+    <button class="button" onclick="prevQuestion()">Previous</button>
+    <button class="button" onclick="nextQuestion()">Next</button>
+</div>
+
+<!-- Squares to show progress -->
+<div class="empty-squares"></div>
+
+<!-- Scores -->
+<div class="score" id="score">Score: 0</div>
+
+<!-- Options -->
+<div class="question-container">
+    <div class="question">
+        <h2 id="option1" onclick="checkAnswer(0)">Spongebob Squarepants</h2>
+    </div>
+    <div class="question">
+        <h2 id="option2" onclick="checkAnswer(1)">Monkey D. Luffy</h2>
+    </div>
+    <div class="question">
+        <h2 id="option3" onclick="checkAnswer(2)">Naruto Uzumaki</h2>
+    </div>
+    <div class="question">
+        <h2 id="option4" onclick="checkAnswer(3)">Drake "@champagnepapi" Graham</h2>
+    </div>
+</div>
+
+<script src="game.js"></script>
+<script src="socket.js"></script>
 </body>
 
 </html>
