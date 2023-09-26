@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>JEOPARODY</title>
     <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
     <style>
         .language-buttons {
@@ -21,12 +24,24 @@
         }
 
         .menu-button {
-            dmargin: 5px;
+            background-color: #000;
+            color: #0f0;
+            border: 2px solid #0f0;
             padding: 10px 20px;
-            background-color: #007BFF;
-            color: #fff;
-            border: none;
             cursor: pointer;
+            font-family: 'Press Start 2P', cursive;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .menu-button:hover {
+            background-color: #0f0;
+            color: #000;
+        }
+
+        .center-container {
+            text-align: center;
         }
     </style>
 </head>
@@ -36,9 +51,10 @@
     <div class="language-buttons">
         <!-- Language buttons will be added dynamically using JavaScript -->
     </div>
+    <button class="menu-button" onclick="backToMainMenu()">Back to Main Menu</button>
 </div>
 
-<button class="menu-button" onclick="backToMainMenu()">Back to Main Menu</button>
+
 
 <script>
     function selectLanguage(languageId) {
