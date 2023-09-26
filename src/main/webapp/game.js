@@ -1,6 +1,6 @@
 //SOCKET CODE
   // Initialize variable to hold message to SocketServlet.java
-let message = '';
+message = '';
 
 const defaultImage = "old-tv-1.gif";
 let questions = [];
