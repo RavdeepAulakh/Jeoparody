@@ -13,9 +13,6 @@
         .jeopardy-title {
             margin-bottom: -20%;
         }
-        .retro-menu-button {
-            margin-top: -20%;
-        }
 
         .center-container {
             margin-top: 0px;
@@ -35,26 +32,6 @@
             cursor: pointer;
         }
 
-        .retro-menu-button {
-            font-family: 'Press Start 2P', cursive; /* retro game look */
-            background-color: #040c7a;
-            border: 3px solid #c49a56; /* Gold border */
-            color: #ffffff; /* White text color */
-            padding: 10px 20px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease; /* Adds animation when hovering and focusing */
-            text-align: center; /* Center the text inside the button */
-            display: block; /* Align centering */
-            margin: 10px auto; /* Center the button with margin at the top and bottom */
-        }
-
-        .retro-menu-button:hover, .retro-menu-button:focus {
-            background-color: #c49a56; /* Gold background */
-            color: #040c7a; /* Blue text */
-            transform: scale(1.1); /* Slightly enlarges the button */
-        }
-
     </style>
 </head>
 <body>
@@ -64,7 +41,12 @@
         <div class="jeopardy-title">JEOPARODY!</div>
     </div>
 
-    <button class="menu-button retro-menu-button" onclick="backToMainMenu()">Back to Main Menu</button>
+    <div class="category-buttons">
+        <div class="button back-button" onclick="backToMainMenu()">
+            Back to Main Menu
+        </div>
+    </div>
+
     <div class="category-buttons">
         <!-- Category buttons will be added dynamically using JavaScript -->
     </div>

@@ -73,3 +73,13 @@ body {
     text-decoration: none;
     color: #000;
 }
+
+.back-button {
+    background: linear-gradient(to bottom, #5B93D7, #2768A5);
+    color: black
+}
+
+.back-button:hover {
+    background: linear-gradient(to bottom, #9CBEE7, #4991D4);
+    color: black
+}
