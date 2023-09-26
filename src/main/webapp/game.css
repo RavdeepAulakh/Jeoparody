@@ -8,6 +8,7 @@ body {
     background-repeat: no-repeat;
     height: auto;
     width: 100vw;
+    overflow-x: hidden;
 }
 
 @font-face {
@@ -19,7 +20,7 @@ body {
     font-family: 'Jeopardy', sans-serif;
     font-size: 50px;;
     color: #c49a56;
-    -webkit-text-stroke: 2px black; 
+    -webkit-text-stroke: 2px black;
     z-index: 4;
     position: absolute;
     margin: 0 0;
@@ -48,13 +49,11 @@ body {
 }
 
 .media {
-    position: absolute; /* Position the GIF image absolutely within the container */
     top: 0;
     left: 10px;
     width: 95%;
     height: 100%;
     object-fit: cover;
-    position: center center;
     z-index: 1; /* Place the GIF image below the PNG image */
 }
 
@@ -107,11 +106,9 @@ body {
     display: flex;
     justify-content: space-between;
     margin: 20px;
-    padding: 0 20px; /* Add padding to the container to separate buttons from the sides */
 }
 
 .button {
-    font-family: 'Press Start 2P', cursive; /* This will give it a retro game look */
     background-color: #040c7a;
     border: 3px solid #c49a56; /* Gold border */
     color: #ffffff; /* White text color */
@@ -130,13 +127,12 @@ body {
     transform: scale(1.1); /* Slightly enlarges the button */
 }
 
-
 .prev-button {
-    order: 1; /* Set the order to 1 for the Previous button */
+    order: 1;
 }
 
 .next-button {
-    order: 2; /* Set the order to 2 for the Next button */
+    order: 2;
 }
 
 .empty-squares {
@@ -155,8 +151,8 @@ body {
 }
 
 .score {
-    text-align: center; /* Center the text horizontally */
-    font-size: 36px;    /* Set a larger font size */
-    color: gold;        /* Set the text color to gold */
-  }
+    text-align: center;
+    font-size: 36px;
+    color: gold;
+}
   
