@@ -36,6 +36,7 @@ public class SocketServlet {
 
     @OnClose
     public void onClose(Session session) {
-
+        sessions.remove(session);
+        System.out.println("Session closed");
     }
 }

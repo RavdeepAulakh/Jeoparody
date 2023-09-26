@@ -26,3 +26,29 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 })
 
+
+let SP = document.getElementById('singlePlayer')
+SP.addEventListener('click', function(){
+    mode = SP.id;
+    console.log(mode)
+
+    fetch('/demo_war_exploded/gameMode', {
+        method: 'POST',
+        headers: {
+            "Content-Type": 'text/plain',
+        },
+        body: mode,
+    })
+        .then((response) => {
+            if (response.ok) {
+                console.log('sent game mode');
+            } else {
+                console.log('error - game mode not sent');
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+
+
+})
