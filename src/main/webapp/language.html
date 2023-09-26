@@ -9,6 +9,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
     <style>
+        .jeopardy-title {
+            margin-bottom: -20%;
+        }
+
+        .center-container {
+            margin-top: 0;
+        }
+
         .language-buttons {
             text-align: center;
             margin-top: 20px;
@@ -22,36 +30,24 @@
             border: none;
             cursor: pointer;
         }
-
-        .menu-button {
-            background-color: #000;
-            color: #0f0;
-            border: 2px solid #0f0;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-family: 'Press Start 2P', cursive;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            display: inline-block;
-            margin-top: 20px;
-        }
-
-        .menu-button:hover {
-            background-color: #0f0;
-            color: #000;
-        }
-
-        .center-container {
-            text-align: center;
-        }
     </style>
 </head>
 <body>
+
 <div class="center-container">
-    <div class="title">JEOPARODY</div>
+    <div class="title">
+        <div class="jeopardy-title">JEOPARODY!</div>
+    </div>
+
+    <div class="category-buttons">
+        <div class="button back-button" onclick="backToMainMenu()">
+            Back to Main Menu
+        </div>
+    </div>
+
     <div class="language-buttons">
         <!-- Language buttons will be added dynamically using JavaScript -->
     </div>
-    <button class="menu-button" onclick="backToMainMenu()">Back to Main Menu</button>
 </div>
 
 
