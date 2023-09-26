@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Score Page</title>
+
+    <title>JEOPARODY</title>
 
     <link rel="stylesheet" href="game.css">
     <link rel="stylesheet" href="score.css">
@@ -15,19 +16,26 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
-
 <body>
-<h1>Your Score</h1>
-<div id="score"></div>
 
-<div class="button-container">
-    <button class="menu-button" onclick="exitGame()">Exit</button>
+<div class="center-container">
+
+
+    <h1 style="font-family: 'Press Start 2P', cursive;">Your Score</h1>
+    <div style="font-family: 'Press Start 2P', cursive;" id="score"></div>
+
+    <div class="category-buttons">
+        <div class="button back-button" onclick="exitGame()">
+            Main Menu
+        </div>
+    </div>
+
 </div>
 
 <script>
     const urlParams = new URLSearchParams(window.location.search);
     const score = parseInt(urlParams.get('score'));
-    const totalQuestions = 10; // Replace with actual total questions count if dynamic
+    const totalQuestions = 10;
     const scoreElement = document.getElementById("score");
     let scoreMessage = "Your Score is: " + score + "/" + totalQuestions + "!";
 
@@ -46,12 +54,9 @@
 
     scoreElement.textContent = scoreMessage;
 
-
     function exitGame() {
         window.location.href = 'index.html';
     }
-
-
 </script>
 
 </body>
