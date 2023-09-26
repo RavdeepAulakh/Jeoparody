@@ -10,6 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c590191b-4236-476e-a1b8-3caa707cb45b" name="Changes" comment="Added a simple login page you can reach">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/ModeServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/mode.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/CategoryServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/CategoryServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/GameServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/GameServlet.java" afterDir="false" />
@@ -39,6 +41,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="WebSocket_WO" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -104,7 +111,40 @@
       <predefined_log_file id="Tomcat Manager" />
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="51199" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Profile">
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>
           <option name="USE_DEFAULT" value="true" />
@@ -154,6 +194,22 @@
       <workItem from="1695252086158" duration="1306000" />
       <workItem from="1695263017228" duration="680000" />
       <workItem from="1695263975029" duration="266000" />
+      <workItem from="1695323671943" duration="52000" />
+      <workItem from="1695326893265" duration="883000" />
+      <workItem from="1695395698195" duration="501000" />
+      <workItem from="1695591774464" duration="1376000" />
+      <workItem from="1695597662103" duration="959000" />
+      <workItem from="1695609247122" duration="4954000" />
+      <workItem from="1695614224099" duration="204000" />
+      <workItem from="1695614638387" duration="6589000" />
+      <workItem from="1695621882606" duration="2130000" />
+      <workItem from="1695649707017" duration="1329000" />
+      <workItem from="1695651183052" duration="380000" />
+      <workItem from="1695651600010" duration="311000" />
+      <workItem from="1695658996499" duration="3595000" />
+      <workItem from="1695682215073" duration="233000" />
+      <workItem from="1695702539821" duration="19000" />
+      <workItem from="1695736208372" duration="1010000" />
     </task>
     <task id="LOCAL-00001" summary="First commit">
       <option name="closed" value="true" />
