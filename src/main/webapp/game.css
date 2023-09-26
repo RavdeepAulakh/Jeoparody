@@ -6,8 +6,8 @@ body {
     background-image: url('blank-jeopardy.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-    height: auto;
-    width: 100vw;
+    height: 100vh;
+    width: auto;
     overflow-x: hidden;
 }
 
@@ -38,6 +38,7 @@ body {
     width: 100%;
 }
 
+/* TV: */
 .image-container {
     position: relative; /* Make the container a positioning context */
     text-align: center;
@@ -67,12 +68,17 @@ body {
     z-index: 2; /* Place the PNG image above the GIF image */
 }
 
+/* QUESTIONS: */
 .question-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, auto);
     gap: 20px;
     margin: 20px;
+}
+
+.question:hover, .question:focus {
+    transform: scale(1.01); /* Slightly enlarges the button */
 }
 
 .question {
@@ -102,10 +108,11 @@ body {
     transition: background-color 0.3s;
 }
 
+/* BUTTONS: */
 .button-container {
     display: flex;
     justify-content: space-between;
-    margin: 20px;
+    margin: 10px 0;
 }
 
 .button {
@@ -135,6 +142,7 @@ body {
     order: 2;
 }
 
+/* SCORES: */
 .empty-squares {
     display: flex;
     flex-wrap: wrap;
