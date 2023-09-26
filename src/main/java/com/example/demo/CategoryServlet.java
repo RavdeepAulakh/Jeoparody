@@ -15,12 +15,16 @@ import jakarta.servlet.http.HttpServletResponse;
 public class CategoryServlet extends HttpServlet {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/jeoparody";
     private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "Kamloops_1";
+    private static final String DB_PASSWORD = "Stuccosong88";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
+
+        // Include the HTML content from category.html
+        request.getRequestDispatcher("/category.html").include(request, response);
+
         out.println("<html><head><title>Select Category</title></head><body>");
 
         // Get the language ID from the request, assuming it's passed as a parameter
@@ -54,7 +58,7 @@ public class CategoryServlet extends HttpServlet {
                 String categoryName = rs.getString("category_name");
 
                 // Create a button for each category
-                out.println("<button onclick=\"selectCategory(" + categoryId + ")\">" + categoryName + "</button><br>");
+                out.println("<div class=\"button\" onclick=\"selectCategory(" + categoryId + ")\">" + categoryName + "</div>");
             }
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();

@@ -1,0 +1,61 @@
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-image: url('space.gif');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+h1 {
+    font-size: 48px;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+    -webkit-background-clip: text;
+    color: transparent;
+    text-align: center;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.3), 0 0 20px rgba(255, 0, 0, 0.3), 0 0 30px rgba(255, 0, 0, 0.3), 0 0 40px rgba(255, 0, 0, 0.3);
+}
+
+form {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin: 20px 0;
+}
+
+label, input, select {
+    display: block;
+    margin: 10px 0;
+    padding: 5px;
+}
+
+input[type="submit"] {
+    border: none;
+    border-radius: 3px;
+    background: linear-gradient(to bottom, #B6CFED, #63A0DA);
+    color: #000;
+    text-shadow: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+input[type="submit"]:hover {
+    background: linear-gradient(to bottom, #9CBFE4, #578AC9);
+}
+
+input[type="submit"]:active {
+    background: linear-gradient(to bottom, #63A0DA, #B6CFED);
+}
+
+#imageOptions {
+    background-color: rgba(240, 240, 240, 0.2);
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
