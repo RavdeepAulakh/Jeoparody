@@ -24,7 +24,7 @@ body {
     -webkit-background-clip: text;
     color: transparent;
     letter-spacing: 5px;
-    padding-top: 20vh;
+    padding-top: 10vh;
     padding-bottom: 25vh;
     text-shadow: 0 0 10px rgba(255, 0, 0, 0.3), 0 0 20px rgba(255, 0, 0, 0.3), 0 0 30px rgba(255, 0, 0, 0.3), 0 0 40px rgba(255, 0, 0, 0.3);
     animation: neon-flicker 1s ease-in-out infinite alternate;
@@ -80,7 +80,7 @@ body {
 }
 
 .back-button:hover {
-    background: linear-gradient(to bottom, #9CBEE7, #4991D4);
+    background: linear-gradient(to bottom, #8caace, #3e7bb4);
     color: black
 }
 
