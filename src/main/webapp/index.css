@@ -83,3 +83,46 @@ body {
     background: linear-gradient(to bottom, #9CBEE7, #4991D4);
     color: black
 }
+
+/* MENU: */
+
+.jeopardy-title {
+    margin-bottom: -20%;
+}
+
+.center-container {
+    margin-top: 0;
+}
+
+/* CATEGORY */
+
+.category-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.category-buttons button {
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+
+/* LANGUAGE: */
+
+.language-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.language-buttons button {
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
