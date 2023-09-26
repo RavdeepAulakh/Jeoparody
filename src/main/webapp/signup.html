@@ -3,6 +3,35 @@
 <head>
     <title>Sign Up</title>
     <link rel="stylesheet" type="text/css" href="signup.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <style>
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        .menu-button {
+            background-color: #000;
+            color: #0f0;
+            border: 2px solid #0f0;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-button:hover {
+            background-color: #0f0;
+            color: #000;
+        }
+
+        .button-container {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 <h1 align="center">Sign up</h1>
@@ -11,5 +40,20 @@
     Password: <input type="password" name="password"><br>
     <input type="submit" value="Sign up">
 </form>
-</body>
+
+<div class="button-container">
+    <button class="menu-button" onclick="exitGame()">Exit</button>
+
+</div>
+
+<script>
+    function exitGame() {
+        window.location.href = 'index.html';
+    }
+
+
+</script>
+
+
+    </body>
 </html>

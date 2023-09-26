@@ -10,19 +10,26 @@ body {
     width: 100vw;
 }
 
-/* SOCKET CODE */
+ SOCKET CODE
 .socket-container{
     position: absolute;
     top: 10px;
     right: 10px;
     width: 350px;
     height: 200px;
+    overflow: hidden;
 }
 
 #socket-feed {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+}
+
+/* Hidden socket feed parent element */
+/* This parent element is used to prepend messages before it */
+.hidden {
+    display: none;
 }
 
 /* SOCKET P ELEMENTS */
@@ -35,7 +42,7 @@ body {
     background-color: #0c1353;
     color: white;
 }
-/* END OF SOCKET CODE */
+ END OF SOCKET CODE
 
 @font-face {
     font-family: 'Jeopardy';
@@ -138,20 +145,25 @@ body {
 }
 
 .button {
-    font-family: Arial, Helvetica, sans-serif;
-    text-transform: uppercase;
-    padding: 20px 40px;
-    font-size: large;
+    font-family: 'Press Start 2P', cursive; /* This will give it a retro game look */
     background-color: #040c7a;
-    color: white;
-    border: 3px solid black;
+    border: 3px solid #c49a56; /* Gold border */
+    color: #ffffff; /* White text color */
+    padding: 10px 20px;
+    text-transform: uppercase;
     cursor: pointer;
+    transition: all 0.3s ease; /* Adds animation when hovering and focusing */
+    text-align: center; /* Center the text inside the button */
+    margin: 0 auto; /* Center the button */
+    display: block; /* Align centering */
 }
 
-.button:hover {
-    background-color: #1929bf;
-    transition: background-color 0.3s;
+.button:hover, .button:focus {
+    background-color: #c49a56; /* Gold background */
+    color: #040c7a; /* Blue text */
+    transform: scale(1.1); /* Slightly enlarges the button */
 }
+
 
 .prev-button {
     order: 1; /* Set the order to 1 for the Previous button */

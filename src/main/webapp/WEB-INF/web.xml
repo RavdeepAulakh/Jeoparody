@@ -74,4 +74,14 @@
         <url-pattern>/language</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>InputQuestionServlet</servlet-name>
+        <servlet-class>com.example.demo.InputQuestionServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>InputQuestionServlet</servlet-name>
+        <url-pattern>/upload</url-pattern>
+    </servlet-mapping>
+
 </web-app>

@@ -1,6 +1,6 @@
 //SOCKET CODE
   // Initialize variable to hold message to SocketServlet.java
-let message = '';
+message = '';
 
 const defaultImage = "old-tv-1.gif";
 let questions = [];
@@ -147,16 +147,17 @@ function checkAnswer(selectedOption) {
       score++;
         answeredQuestions[currentQuestion] = { status: "right", option: selectedOption };
         document.getElementById("option" + (selectedOption + 1)).style.color = "green";
-        //SOCKET CODE
+            //SOCKET CODE
         message = "Correct answer."
         webSocket.send(message);
     } else {
         answeredQuestions[currentQuestion] = { status: "wrong", option: selectedOption };
         document.getElementById("option" + (selectedOption + 1)).style.color = "red";
         document.getElementById("option" + (correctIndex + 1)).style.color = "green";
-        //SOCKET CODE
+            //SOCKET CODE
         message = "Incorrect answer."
         webSocket.send(message);
+
     }
     //SOCKET CODE
     // Reset message contents to socket
@@ -175,14 +176,15 @@ function checkAnswer(selectedOption) {
 }
 
 function nextQuestion() {
-  if (currentQuestion < questions.length - 1) {
-    currentQuestion++;
-    displayQuestion();
-    UpdateSquare();
-  } else {
-    // What happens when there are no more questions? Maybe show a results page?
-  }
+    if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        displayQuestion();
+        UpdateSquare();
+    } else {
+        window.location.href = `score.html?score=${score}&languageId=${languageId}`;
+    }
 }
+
 
 function prevQuestion() {
   if (currentQuestion > 0) {
@@ -191,5 +193,12 @@ function prevQuestion() {
     UpdateSquare();
   }
 }
+
+function differentCategory() {
+    const url = `/demo_war_exploded/categories?languageId=${languageId}`;
+    console.log("Redirecting to URL: ", url); // Log the URL to the console
+    window.location.href = url;
+}
+
 
 fetchDataFromServlet(languageId, categoryId);
