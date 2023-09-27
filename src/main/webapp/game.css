@@ -6,39 +6,9 @@ body {
     background-image: url('blank-jeopardy.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-    height: auto;
-    width: 100vw;
-}
-
-
-.socket-container{
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 350px;
-    height: 200px;
-    overflow: hidden;
-}
-
-#socket-feed {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-
-
-.hidden {
-    display: none;
-}
-
-#socket-feed > p {
-    font-size: 10px;
-    padding: 10px;
-    margin: 5px;
-    border-radius: 15px;
-    overflow-wrap: break-word;
-    background-color: #0c1353;
-    color: white;
+    height: 100vh;
+    width: auto;
+    overflow-x: hidden;
 }
 
 @font-face {
@@ -50,7 +20,7 @@ body {
     font-family: 'Jeopardy', sans-serif;
     font-size: 50px;;
     color: #c49a56;
-    -webkit-text-stroke: 2px black; 
+    -webkit-text-stroke: 2px black;
     z-index: 4;
     position: absolute;
     margin: 0 0;
@@ -68,6 +38,7 @@ body {
     width: 100%;
 }
 
+/* TV: */
 .image-container {
     position: relative; /* Make the container a positioning context */
     text-align: center;
@@ -79,13 +50,11 @@ body {
 }
 
 .media {
-    position: absolute; /* Position the GIF image absolutely within the container */
     top: 0;
     left: 10px;
     width: 95%;
     height: 100%;
     object-fit: cover;
-    position: center center;
     z-index: 1; /* Place the GIF image below the PNG image */
 }
 
@@ -99,12 +68,17 @@ body {
     z-index: 2; /* Place the PNG image above the GIF image */
 }
 
+/* QUESTIONS: */
 .question-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, auto);
     gap: 20px;
     margin: 20px;
+}
+
+.question:hover, .question:focus {
+    transform: scale(1.01); /* Slightly enlarges the button */
 }
 
 .question {
@@ -134,15 +108,14 @@ body {
     transition: background-color 0.3s;
 }
 
+/* BUTTONS: */
 .button-container {
     display: flex;
     justify-content: space-between;
-    margin: 20px;
-    padding: 0 20px; /* Add padding to the container to separate buttons from the sides */
+    margin: 10px 0;
 }
 
 .button {
-    font-family: 'Press Start 2P', cursive; /* This will give it a retro game look */
     background-color: #040c7a;
     border: 3px solid #c49a56; /* Gold border */
     color: #ffffff; /* White text color */
@@ -161,15 +134,15 @@ body {
     transform: scale(1.1); /* Slightly enlarges the button */
 }
 
-
 .prev-button {
-    order: 1; /* Set the order to 1 for the Previous button */
+    order: 1;
 }
 
 .next-button {
-    order: 2; /* Set the order to 2 for the Next button */
+    order: 2;
 }
 
+/* SCORES: */
 .empty-squares {
     display: flex;
     flex-wrap: wrap;
@@ -186,8 +159,8 @@ body {
 }
 
 .score {
-    text-align: center; /* Center the text horizontally */
-    font-size: 36px;    /* Set a larger font size */
-    color: gold;        /* Set the text color to gold */
-  }
+    text-align: center;
+    font-size: 36px;
+    color: gold;
+}
   

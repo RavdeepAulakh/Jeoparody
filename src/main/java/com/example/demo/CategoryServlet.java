@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class CategoryServlet extends HttpServlet {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/jeoparody";
     private static final String DB_USER = "root";
+
     private static final String DB_PASSWORD = "Kamloops_1";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

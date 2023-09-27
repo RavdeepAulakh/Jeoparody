@@ -24,7 +24,7 @@ body {
     -webkit-background-clip: text;
     color: transparent;
     letter-spacing: 5px;
-    padding-top: 20vh;
+    padding-top: 10vh;
     padding-bottom: 25vh;
     text-shadow: 0 0 10px rgba(255, 0, 0, 0.3), 0 0 20px rgba(255, 0, 0, 0.3), 0 0 30px rgba(255, 0, 0, 0.3), 0 0 40px rgba(255, 0, 0, 0.3);
     animation: neon-flicker 1s ease-in-out infinite alternate;
@@ -72,4 +72,57 @@ body {
 .button a {
     text-decoration: none;
     color: #000;
+}
+
+.back-button {
+    background: linear-gradient(to bottom, #5B93D7, #2768A5);
+    color: black
+}
+
+.back-button:hover {
+    background: linear-gradient(to bottom, #8caace, #3e7bb4);
+    color: black
+}
+
+/* MENU: */
+
+.jeopardy-title {
+    margin-bottom: -20%;
+}
+
+.center-container {
+    margin-top: 0;
+}
+
+/* CATEGORY */
+
+.category-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.category-buttons button {
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+
+/* LANGUAGE: */
+
+.language-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.language-buttons button {
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
 }
