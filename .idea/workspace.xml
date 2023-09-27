@@ -10,21 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c590191b-4236-476e-a1b8-3caa707cb45b" name="Changes" comment="Added a simple login page you can reach">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-09-26_11_57_a_m__[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-09-26_11_57_a_m__[Changes]1/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-09-26_11_57_a_m___Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-09-26_11_57_a_m___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-09-26_11_57_a_m___Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/CategoryServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/CategoryServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/GameServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/GameServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/InputQuestionServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/InputQuestionServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/LanguageServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/LanguageServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/LoginServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/SignupServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/SignupServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/SocketServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/SocketServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/game.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/game.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/mode.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/mode.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/score.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/score.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/game.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,6 +57,9 @@
     <option name="FILTER_DEBUG" value="true" />
     <option name="CUSTOM_FILTER" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -77,15 +68,19 @@
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
+    <option name="showVisibilityIcons" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "DefaultHtmlFileTemplate": "HTML File",
+    "Notification.DisplayName-DoNotAsk-WindowsDefender": "Microsoft Defender configuration",
+    "Notification.DoNotAsk-WindowsDefender": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Will__Dev2",
+    "git-widget-placeholder": "Will__ScoreBug",
+    "ignore.virus.scanning.warn.message": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -210,6 +205,8 @@
       <workItem from="1695682215073" duration="233000" />
       <workItem from="1695702539821" duration="19000" />
       <workItem from="1695736208372" duration="1010000" />
+      <workItem from="1695771474127" duration="905000" />
+      <workItem from="1695772408229" duration="486000" />
     </task>
     <task id="LOCAL-00001" summary="First commit">
       <option name="closed" value="true" />

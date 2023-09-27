@@ -147,17 +147,22 @@ function checkAnswer(selectedOption) {
       score++;
         answeredQuestions[currentQuestion] = { status: "right", option: selectedOption };
         document.getElementById("option" + (selectedOption + 1)).style.color = "green";
+        if (mode == 'multiPlayer'){
             //SOCKET CODE
-        message = "Correct answer."
-        webSocket.send(message);
+            message = "Correct answer."
+            webSocket.send(message);
+        }
+
     } else {
         answeredQuestions[currentQuestion] = { status: "wrong", option: selectedOption };
         document.getElementById("option" + (selectedOption + 1)).style.color = "red";
         document.getElementById("option" + (correctIndex + 1)).style.color = "green";
-            //SOCKET CODE
-        message = "Incorrect answer."
-        webSocket.send(message);
 
+        if (mode == 'multiPlayer') {
+            //SOCKET CODE
+            message = "Incorrect answer."
+            webSocket.send(message);
+        }
     }
     //SOCKET CODE
     // Reset message contents to socket
@@ -166,9 +171,12 @@ function checkAnswer(selectedOption) {
 
     document.getElementById("score").textContent = "Score: " + score;
 
+
     // SOCKET CODE
-    message = document.getElementById("score").textContent = "Score: " + score;
-    webSocket.send(message);
+    if (mode == 'multiPlayer') {
+        message = document.getElementById("score").textContent = "Score: " + score;
+        webSocket.send(message);
+    }
 
     updateImage();
   }
