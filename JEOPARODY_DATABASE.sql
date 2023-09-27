@@ -58,7 +58,7 @@ CREATE TABLE Options (
                          question_id INT,
                          option_text VARCHAR(300) NOT NULL,
                          is_correct BOOLEAN NOT NULL,
-                         FOREIGN KEY (question_id) REFERENCES Questions(question_id)
+                         FOREIGN KEY (question_id) REFERENCES Questions(question_id) ON DELETE CASCADE
 );
 
 -- --------------------------------------

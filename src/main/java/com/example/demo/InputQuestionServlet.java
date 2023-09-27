@@ -127,6 +127,7 @@ public class InputQuestionServlet extends HttpServlet{
                         row = optionStatement.executeUpdate();
                         optionStatement.close();
                     }
+                    response.sendRedirect("list");
                 }
                 //con.close();
             } catch(SQLException ex) {
