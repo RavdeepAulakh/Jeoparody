@@ -24,7 +24,7 @@ public class GameServlet extends HttpServlet {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/jeoparody";
     private static final String DB_USER = "root";
 
-    private static final String DB_PASSWORD = "Kamloops_1";
+    private static final String DB_PASSWORD = "gyattrizz37";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -66,7 +66,7 @@ public class InputQuestionServlet extends HttpServlet{
             System.out.println("Message: " + ex.getMessage ());
             return;
         }
-        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jeoparody", "root", "Kamloops_1")) {
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jeoparody", "root", "gyattrizz37")) {
             int catID = 1;
             int languageID = 1;
             switch (category) {
@@ -106,7 +106,7 @@ public class InputQuestionServlet extends HttpServlet{
                 preparedStatement.setInt(1, catID);
                 preparedStatement.setInt(2, languageID);
                 preparedStatement.setString(3, question);
-                preparedStatement.setString(4, "images/" + fileName);
+                preparedStatement.setString(4, "/images/" + fileName);
 //            preparedStatement.setBinaryStream(7, filePart.getInputStream());
                 int row = preparedStatement.executeUpdate();
                 int questionID = -1;

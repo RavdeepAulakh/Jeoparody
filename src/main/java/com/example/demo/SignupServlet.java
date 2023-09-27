@@ -31,7 +31,7 @@ public class SignupServlet extends HttpServlet {
                 Class.forName("com.mysql.cj.jdbc.Driver");
             } catch (Exception ex) { }
 
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jeoparody", "root", "Kamloops_1");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jeoparody", "root", "gyattrizz37");
 
             // Retrieve username, password, and staff code from the HTTP request
             String username = request.getParameter("user_id");
