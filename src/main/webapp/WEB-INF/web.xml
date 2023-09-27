@@ -84,4 +84,14 @@
         <url-pattern>/upload</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ListAndDeleteQuestionsServlet</servlet-name>
+        <servlet-class>com.example.demo.ListAndDeleteQuestionsServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ListAndDeleteQuestionsServlet</servlet-name>
+        <url-pattern>/list</url-pattern>
+    </servlet-mapping>
+
 </web-app>
