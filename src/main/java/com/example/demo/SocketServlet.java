@@ -11,7 +11,7 @@ public class SocketServlet {
 
     // Create a set of sessions to hold the different user sessions
     private static final Set<Session> sessions = new HashSet<>();
-
+    Session user;
     @OnOpen
     public void onOpen(Session session) {
         sessions.add(session);
@@ -34,9 +34,23 @@ public class SocketServlet {
         }
     }
 
+    public void leaveGame (Session session){
+        for (Session s : sessions) {
+            if (s.isOpen()){
+                try {
+                    s.getBasicRemote().sendText(user + "\n just left the game");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+    }
+
     @OnClose
     public void onClose(Session session) {
+        user = session;
         sessions.remove(session);
-        System.out.println("Session closed");
+        leaveGame(user);
     }
 }
