@@ -1,6 +1,7 @@
 // Fetching data from the server endpoint '/gameMode' (within the ModeServlet)
     // Previously sent an gameMode variable to the servlet
         // Now we're retrieving it with async functions as there is a slight delay when getting the value
+let gameMode;
 async function fetchMode() {
     try {
         const response = await fetch('/demo_war_exploded/gameMode');
@@ -9,7 +10,7 @@ async function fetchMode() {
         }
 
         const data = await response.json();
-        const gameMode = data.gameMode;
+        gameMode = data.gameMode;
         console.log(gameMode)
         return gameMode
     } catch (error) {
@@ -27,7 +28,7 @@ let message;
 let socketItem;
 async function initializeSocket() {
     // Wait for the gameMode value from the fetchMode function
-    const gameMode = await fetchMode();
+    gameMode = await fetchMode();
     console.log("socket func received data" + gameMode);
 
     if (gameMode == 'multiPlayer'){

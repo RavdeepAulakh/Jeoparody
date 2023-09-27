@@ -128,9 +128,10 @@ function UpdateSquare() {
         }
     }
 }
-
-function checkAnswer(selectedOption) {
-
+let modeOfGame;
+async function checkAnswer(selectedOption) {
+    modeOfGame = await fetchMode();
+    console.log(modeOfGame);
   if (
       questions[currentQuestion] &&
       correctAnswers[currentQuestion] !== undefined
@@ -147,7 +148,7 @@ function checkAnswer(selectedOption) {
       score++;
         answeredQuestions[currentQuestion] = { status: "right", option: selectedOption };
         document.getElementById("option" + (selectedOption + 1)).style.color = "green";
-        if (mode == 'multiPlayer'){
+        if (modeOfGame == 'multiPlayer'){
             //SOCKET CODE
             message = "Correct answer."
             webSocket.send(message);
@@ -158,7 +159,7 @@ function checkAnswer(selectedOption) {
         document.getElementById("option" + (selectedOption + 1)).style.color = "red";
         document.getElementById("option" + (correctIndex + 1)).style.color = "green";
 
-        if (mode == 'multiPlayer') {
+        if (modeOfGame == 'multiPlayer') {
             //SOCKET CODE
             message = "Incorrect answer."
             webSocket.send(message);
@@ -173,7 +174,7 @@ function checkAnswer(selectedOption) {
 
 
     // SOCKET CODE
-    if (mode == 'multiPlayer') {
+    if (modeOfGame == 'multiPlayer') {
         message = document.getElementById("score").textContent = "Score: " + score;
         webSocket.send(message);
     }
