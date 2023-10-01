@@ -12,10 +12,6 @@
 6. Run the tomcat server and a window with the homepage of the application should
 automatically be opened
 
-
-
-
-
 #
 # Web Sockets
 Done by: Will Ondrik
@@ -33,3 +29,33 @@ Done by: Will Ondrik
         - lines 148-150
         - lines 153-156
         - lines 160-162
+     
+# Game Logic
+Dony by: Gathrean Dela Cruz and Bardia Timouri
+
+### Files
+- `game.js`, `game.html`, `game.css`
+    - Front-end Client
+- `LanguageServlet` and `CategoryServlet` 
+    - First and second step before starting the game, respectively
+    - Redirects to GameServlet when both language ID and category ID as sent as parameters
+- `GameServlet`
+    1. Receives language and cateogry IDs, and fetches appropriates questions from database
+    2. Organize data into JSON arrays and sends the JSON response back to client
+    3. Handles AJAX requests for the quiz and provide data
+    4. Then presents the questions and options to the user in the game frontend
+ 
+# Contributions List
+- Aulakh, Ravdeep
+    - []
+- Dela Cruz, Gathrean (Ean)
+    - Game Logic and Frontend
+- Park, Hyuk
+    - []
+- Ondrik, Will
+    - Web Sockets
+- Solkoski, Laurie
+    - []
+- Timouri, Bardia
+    - Game Logic and Frontend
+
