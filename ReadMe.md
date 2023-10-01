@@ -16,23 +16,20 @@ automatically be opened
 
 
 
-
+#
 # Web Sockets
 Done by: Will Ondrik
 
 ## Socket code locations:
 ### Files:
---- socket.js
---- SocketServlet.java
---- mode.js
---- ModeServlet.java
----- game.js (designated with // SOCKET CODE)
-        --- line 1-3
-        ---checkAnswer function
-            --- lines 139-141
-            --- lines 148-150
-            --- lines 153-156
-            --- lines 160-162
-
---- game.css
-    --- lines 13-37
+- `socket.js` (front-end socket connection)
+- `SocketServlet.java` (back-end socket configurations)
+- `mode.js` (posts the selected game type to ModeServlet.java)
+- `ModeServlet.java` (stores the game type and informs the front-end)
+- `game.js` (sends socket messages to the SocketServlet)
+    - lines 1-3
+    - `checkAnswer` function
+        - lines 139-141
+        - lines 148-150
+        - lines 153-156
+        - lines 160-162
