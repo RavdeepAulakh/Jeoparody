@@ -17,11 +17,11 @@ automatically be opened
 
 
 
-Web Sockets
---- Done by: Will Ondrik
+# Web Sockets
+Done by: Will Ondrik
 
-Socket code locations:
-Files:
+## Socket code locations:
+### Files:
 --- socket.js
 --- SocketServlet.java
 --- mode.js
