@@ -31,25 +31,36 @@ Done by: Will Ondrik
         - lines 160-162
      
 # Game Logic
-Dony by: Gathrean Dela Cruz and Bardia Timouri
+Done by: Gathrean Dela Cruz and Bardia Timouri
 
 ### Files
-- `game.js`, `game.html`, `game.css`
-    - Front-end Client
+- `game.js`, `game.html`, `game.css`, `index.html`, `index.css`, `index.js`
+    - Created front end for home page (Bardia)
+    - Front-end Client (Ean)
+    - Functions to show the user what question they are on, got wrong, got right (Bardia)
+    - Functions to go next, and prev (Ean)
+    - Functions to keep track of the score (Ean)
+    - Function to update images and questions and options from the JSON array (Bardia)
+    - Made use of AJAX to dynamically update questions to the (Bardia)
+    - Used JS fetch function to retrieve questions and images in array format from GameServlet (Bardia)
 - `LanguageServlet` and `CategoryServlet` 
-    - First and second step before starting the game, respectively
-    - Redirects to GameServlet when both language ID and category ID as sent as parameters
+    - First and second step before starting the game, respectively (Ean)
+    - Redirects to GameServlet when both language ID and category ID as sent as parameters (Bardia)
 - `GameServlet`
-    1. Receives language and cateogry IDs, and fetches appropriates questions from database
-    2. Organize data into JSON arrays and sends the JSON response back to client
-    3. Handles AJAX requests for the quiz and provide data
-    4. Then presents the questions and options to the user in the game frontend
+    1. Receives language and cateogry IDs, and fetches appropriates questions from database (Bardia)
+    2. Organize data into JSON arrays and sends the JSON response back to client (Ean)
+    3. Handles AJAX requests for the quiz and provide data (Bardia)
+    4. Then presents the questions and options to the user in the game frontend (Ean)
+- 'DisplayServlet'
+    - Used doGet to display the game screen (Bardia)
  
 # Contributions List
 - Aulakh, Ravdeep
     - []
 - Dela Cruz, Gathrean (Ean)
     - Game Logic and Frontend
+    - Allowing the frontend to recieve questions from the backend
+    - Game design
 - Park, Hyuk
     - []
 - Ondrik, Will
@@ -58,4 +69,10 @@ Dony by: Gathrean Dela Cruz and Bardia Timouri
     - []
 - Timouri, Bardia
     - Game Logic and Frontend
+    - Allowing the frontend to recieve questions from the backend
+    - Allowing the frontend to display images gathered from backend
+    - Gathering questions and answers in english
+    - Mid fidelity wireframe for home screen
+    - Game design
+      
 
