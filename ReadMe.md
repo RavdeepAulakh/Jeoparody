@@ -13,20 +13,26 @@
 automatically be opened
 
 
-Socket code locations
 
+
+
+
+Web Sockets
+--- Done by: Will Ondrik
+
+Socket code locations:
 Files:
-- socket.js
-- SocketServlet.java
+--- socket.js
+--- SocketServlet.java
+--- mode.js
+--- ModeServlet.java
+---- game.js (designated with // SOCKET CODE)
+        --- line 1-3
+        ---checkAnswer function
+            --- lines 139-141
+            --- lines 148-150
+            --- lines 153-156
+            --- lines 160-162
 
-Other:
-- game.js (designated with // SOCKET CODE)
-        - line 1-3
-        - checkAnswer function
-            - lines 139-141
-            - lines 148-150
-            - lines 153-156
-            - lines 160-162
-
-- game.css (designated with /* SOCKET CODE */)
-    - lines 13-37
+--- game.css
+    --- lines 13-37
