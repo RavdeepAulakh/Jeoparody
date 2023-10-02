@@ -27,16 +27,12 @@ public class SignupServlet extends HttpServlet {
         Connection con = null;
 
         try {
-            try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-            } catch (Exception ex) { }
 
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jeoparody", "root", "gyattrizz37");
+            con = DatabaseConnection.getConnection();
 
             // Retrieve username, password, and staff code from the HTTP request
             String username = request.getParameter("user_id");
             String password = request.getParameter("password");
-            String staffCode = request.getParameter("staff_code");
 
 
                 // Staff code is correct, proceed with account creation

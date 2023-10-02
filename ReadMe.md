@@ -8,7 +8,7 @@
 ![img.png](readmeImages/img.png)
 3. First create a new Scheme called jeoparody
 4. Run the JEOPARODY_DATABASE.sql file in your workbench to create the database needed
-5. Add your mysql password and username into the servlets (Category, Game, InputQuestions, Language, Login, Signup)
+5. Add your mysql password and username into the servlets (Category, Game, InputQuestions, Language, Login, Signup, InputQuestion, ListAndDeleteQuestions)
 6. Run the tomcat server and a window with the homepage of the application should
 automatically be opened
 
@@ -87,7 +87,12 @@ Done by: Laurie Solkoski
 
 # Contributions List
 - Aulakh, Ravdeep
-    - []
+    - Login and signup functionality
+    - Retrieving images from database and displaying on quiz
+    - Upload image making it save in the projects images folder
+    - Some SQL debugging and making the accounts table
+    - Getting language options from the database and displaying as buttons
+    - Getting category options from the database and displaying as buttons
 - Dela Cruz, Gathrean (Ean)
     - Game Logic and Frontend
     - Allowing the frontend to recieve questions from the backend

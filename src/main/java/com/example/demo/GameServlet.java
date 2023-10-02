@@ -21,10 +21,6 @@ import javax.json.Json;
 import com.google.gson.JsonObject;
 
 public class GameServlet extends HttpServlet {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/jeoparody";
-    private static final String DB_USER = "root";
-
-    private static final String DB_PASSWORD = "gyattrizz37";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -49,7 +45,7 @@ public class GameServlet extends HttpServlet {
         JsonArray imageLocations = new JsonArray();
 
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            Connection conn = DatabaseConnection.getConnection();
 
             // Fetch all questions and options for the given language and category
             String sql = "SELECT Q.question_id, Q.question_text, O.option_text, O.is_correct, Q.image_location_data " +

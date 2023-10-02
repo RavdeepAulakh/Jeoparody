@@ -27,9 +27,8 @@ public class LoginServlet extends HttpServlet {
         Connection con = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
 
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jeoparody", "root", "gyattrizz37");
+            con = DatabaseConnection.getConnection();
 
             // Retrieve username and plaintext password from the HTTP request
             String username = request.getParameter("user_id");
@@ -63,7 +62,7 @@ public class LoginServlet extends HttpServlet {
 
             preparedStatement.close();
             con.close();
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (SQLException ex) {
             // Handle exceptions
             ex.printStackTrace();
             errMsg = "An error occurred during login.";

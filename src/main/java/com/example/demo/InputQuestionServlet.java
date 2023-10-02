@@ -58,15 +58,24 @@ public class InputQuestionServlet extends HttpServlet{
         boolean option2Correct = Boolean.parseBoolean(request.getParameter("option2_correct"));
         boolean option3Correct = Boolean.parseBoolean(request.getParameter("option3_correct"));
         boolean option4Correct = Boolean.parseBoolean(request.getParameter("option4_correct"));
+        String uploadDirectory = getServletContext().getRealPath("/") + "images/";
         String fileName = filePart.getSubmittedFileName();
+        String filePath = uploadDirectory + fileName;
+        try (OutputStream out = new FileOutputStream(filePath)) {
+            InputStream fileContent = filePart.getInputStream();
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = fileContent.read(buffer)) != -1) {
+                out.write(buffer, 0, bytesRead);
+            }
+        } catch (IOException e) {
+            // Handle the exception (e.g., log or display an error message)
+            e.printStackTrace();
+        }
         if(question.equals("")) question = "No Question";
         System.out.println(">>>>>" + imageCaption + category + question + option1 + option2 + option3 + option4 + fileName);
-//        Connection con = null;
-        try {Class.forName("com.mysql.cj.jdbc.Driver"); } catch (Exception ex) {
-            System.out.println("Message: " + ex.getMessage ());
-            return;
-        }
-        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jeoparody", "root", "gyattrizz37")) {
+
+        try (Connection con = DatabaseConnection.getConnection()) {
             int catID = 1;
             int languageID = 1;
             switch (category) {

@@ -13,10 +13,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class LanguageServlet extends HttpServlet {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/jeoparody";
-    private static final String DB_USER = "root";
-
-    private static final String DB_PASSWORD = "gyattrizz37";
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -36,7 +32,7 @@ public class LanguageServlet extends HttpServlet {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Establish the database connection
-            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            conn = DatabaseConnection.getConnection();
 
             // Create and execute the SQL query
             stmt = conn.createStatement();
