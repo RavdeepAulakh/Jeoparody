@@ -54,6 +54,25 @@ Done by: Gathrean Dela Cruz and Bardia Timouri
 - 'DisplayServlet'
     - Used doGet to display the game screen (Bardia)
  
+# Quiz Question Upload/Management
+Done by: Gathrean Dela Cruz and Hyuk Park
+
+### Files
+- `InputQuestionServlet.java`
+  - Creates a query that will submit information regarding new question into local database (category, language, etc..) (Hyuk)
+  - Loads front end html and styling to user (Hyuk)
+  - Handles authentication and ensure user is logged in prior to submitting, redirects user to login if otherwise (Hyuk)
+- `ListAndDeleteQuestionsServlet.java`
+  - Creates a query that retrieves all the questions in the quiz from the local database and presents them on the page (Hyuk)
+  - Each question has the option to be deleted, which is done through another query and use of the question ID (Hyuk)
+  - Page is reloaded after changes to reflect that deletion was successful (Hyuk)
+- `submit.css`, `submit.html`, `submit.js`, `questions.html`
+  - Front-end Client (Ean)
+  - Function for drop down selection for categories and languages (Hyuk)
+  - Initial structure and styling for Front-end Client (Hyuk)
+
+  
+
 # Contributions List
 - Aulakh, Ravdeep
     - []
@@ -62,7 +81,10 @@ Done by: Gathrean Dela Cruz and Bardia Timouri
     - Allowing the frontend to recieve questions from the backend
     - Game design
 - Park, Hyuk
-    - []
+    - Quiz question Upload Page (Front-end/back-end)
+      - Allowing frontend page to send a quiz question into the database from the backend
+    - Quiz question Management Page (Back-end)
+      - Allowing page to retrieve quiz question from the local database from the backend
 - Ondrik, Will
     - Web Sockets
 - Solkoski, Laurie
