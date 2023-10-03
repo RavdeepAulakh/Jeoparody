@@ -7,6 +7,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,41 +25,20 @@ public class LanguageServlet extends HttpServlet {
         // Include the HTML content from language.html
         request.getRequestDispatcher("/language.html").include(request, response);
 
-        Connection conn = null;
-        Statement stmt = null;
-        ResultSet rs = null;
 
-        try {
-            // Load the MySQL JDBC driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
+        List<String> languagesInfos = SQLCommands.getLanguages();
 
-            // Establish the database connection
-            conn = DatabaseConnection.getConnection();
+        for (String languagesInfo : languagesInfos) {
+            String[] parts = languagesInfo.split(",");
+            if (parts.length == 2) {
+                int language_id = Integer.parseInt(parts[0]);
+                String language_name = parts[1];
 
-            // Create and execute the SQL query
-            stmt = conn.createStatement();
-            String sql = "SELECT * FROM Languages";
-            rs = stmt.executeQuery(sql);
-
-            while (rs.next()) {
-                int id = rs.getInt("language_id");
-                String name = rs.getString("language_name");
-
-                // Create a button for each language
-                out.println("<div class=\"button\" onclick=\"selectLanguage(" + id + ")\">" + name + "</div>");
-            }
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        } finally {
-            // Close the database resources in the reverse order of their creation
-            try {
-                if (rs != null) rs.close();
-                if (stmt != null) stmt.close();
-                if (conn != null) conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
+                    // Create a button for each category
+                out.println("<div class=\"button\" onclick=\"selectLanguage(" + language_id + ")\">" + language_name + "</div>");
             }
         }
+
 
         // JavaScript function to handle button click
 //        out.println("<script src=\"language.js\"></script>");
