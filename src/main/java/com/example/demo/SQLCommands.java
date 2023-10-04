@@ -113,4 +113,8 @@ public class SQLCommands {
         return "INSERT INTO accounts (username, password) VALUES (?, ?)";
     }
 
+    public static String getSQLQuestionAndText(){
+        return "SELECT question_id, question_text FROM Questions";
+    }
+
 }
