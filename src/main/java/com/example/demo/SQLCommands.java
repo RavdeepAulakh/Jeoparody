@@ -93,7 +93,6 @@ public class SQLCommands {
                 "WHERE Q.language_id = ? AND Q.category_id = ?";
     }
 
-
     public static String getSQLInsertIntoQuestions(){
         return "INSERT INTO Questions(category_id, language_id, question_text, image_location_data) VALUES (?,?,?,?)";
     }
@@ -102,8 +101,16 @@ public class SQLCommands {
         return "INSERT INTO Options (question_id, option_text, is_correct) VALUES (?,?,?)";
     }
 
+    public static String getSQLDeleteFromQuestions() {
+        return "DELETE FROM Questions WHERE question_id = ?";
+    }
+
     public static String getSQLAccountsWithUser() {
         return "SELECT * FROM accounts WHERE username=?";
+    }
+
+    public static String getSQLSignup() {
+        return "INSERT INTO accounts (username, password) VALUES (?, ?)";
     }
 
 }
