@@ -47,11 +47,9 @@ public class GameServlet extends HttpServlet {
         try {
             Connection conn = DatabaseConnection.getConnection();
 
+
             // Fetch all questions and options for the given language and category
-            String sql = "SELECT Q.question_id, Q.question_text, O.option_text, O.is_correct, Q.image_location_data " +
-                    "FROM Questions Q " +
-                    "INNER JOIN Options O ON Q.question_id = O.question_id " +
-                    "WHERE Q.language_id = ? AND Q.category_id = ?";
+            String sql = SQLCommands.getSQLQuestions();
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, languageId);

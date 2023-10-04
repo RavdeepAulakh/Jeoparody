@@ -78,4 +78,12 @@ public class SQLCommands {
 
         return languages;
     }
+
+    public static String getSQLQuestions() {
+        return "SELECT Q.question_id, Q.question_text, O.option_text, O.is_correct, Q.image_location_data " +
+                "FROM Questions Q " +
+                "INNER JOIN Options O ON Q.question_id = O.question_id " +
+                "WHERE Q.language_id = ? AND Q.category_id = ?";
+    }
+
 }
