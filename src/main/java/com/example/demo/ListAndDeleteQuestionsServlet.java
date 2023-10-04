@@ -29,8 +29,8 @@ public class ListAndDeleteQuestionsServlet extends HttpServlet {
                         insideQuestionsDiv = true;
 
                         // Generate the questions here
-                        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jeoparody", "root", "hockey04")) {
-                            String query = "SELECT question_id, question_text FROM Questions";
+                        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jeoparody", "root", "INSERTPASSWORD")) {
+                            String query = SQLCommands.getSQLQuestionAndText();
                             try (PreparedStatement stmt = con.prepareStatement(query)) {
                                 ResultSet rs = stmt.executeQuery();
                                 while (rs.next()) {
@@ -90,7 +90,7 @@ public class ListAndDeleteQuestionsServlet extends HttpServlet {
 //        int deleteID = Integer.parseInt(request.getParameter("delete_id"));
 
         try (Connection con = DatabaseConnection.getConnection();
-             PreparedStatement preparedStatement = con.prepareStatement("DELETE FROM Questions WHERE question_id = ?")) {
+             PreparedStatement preparedStatement = con.prepareStatement(SQLCommands.getSQLDeleteFromQuestions())) {
 
             preparedStatement.setInt(1, deleteID);
             preparedStatement.executeUpdate();

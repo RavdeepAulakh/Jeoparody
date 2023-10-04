@@ -107,7 +107,7 @@ public class InputQuestionServlet extends HttpServlet{
                     break;
             }
 
-            try (PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO Questions(category_id, language_id, question_text, image_location_data) VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS)) {
+            try (PreparedStatement preparedStatement = con.prepareStatement(SQLCommands.getSQLInsertIntoQuestions(), Statement.RETURN_GENERATED_KEYS)) {
                 //            UUID uuid = UUID.randomUUID();
                 // if image is null (meaning its url or neither)
                 // if url is null (meaning its image)
@@ -129,7 +129,7 @@ public class InputQuestionServlet extends HttpServlet{
                     String[] optionText = { option1, option2, option3, option4 };
                     boolean[] optionValues = {option1Correct, option2Correct, option3Correct, option4Correct};
                     for (int i = 0; i < optionText.length; i++) {
-                        PreparedStatement optionStatement = con.prepareStatement("INSERT INTO Options (question_id, option_text, is_correct) VALUES (?,?,?)");
+                        PreparedStatement optionStatement = con.prepareStatement(SQLCommands.getSQLInsertIntoOptions());
                         optionStatement.setInt(1, questionID);
                         optionStatement.setString(2,optionText[i]);
                         optionStatement.setBoolean(3, optionValues[i]);

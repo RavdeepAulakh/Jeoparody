@@ -42,7 +42,7 @@ public class SignupServlet extends HttpServlet {
                 System.out.println("Hashed Password " + hashedPassword);
 
                 // Create an SQL INSERT statement to add the new user
-                String insertSQL = "INSERT INTO accounts (username, password) VALUES (?, ?)";
+                String insertSQL = SQLCommands.getSQLSignup();
 
                 // Use PreparedStatement to safely insert the values into the database
                 PreparedStatement preparedStatement = con.prepareStatement(insertSQL);

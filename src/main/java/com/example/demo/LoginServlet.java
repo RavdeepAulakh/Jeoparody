@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
             String enteredPassword = request.getParameter("password");
 
             // Retrieve the hashed password from the database
-            PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM accounts WHERE username=?");
+            PreparedStatement preparedStatement = con.prepareStatement(SQLCommands.getSQLAccountsWithUser());
             preparedStatement.setString(1, username);
             ResultSet resultSet = preparedStatement.executeQuery();
 
