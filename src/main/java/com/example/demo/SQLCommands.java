@@ -20,7 +20,7 @@ public class SQLCommands {
             con =  DatabaseConnection.getConnection();
             stmt = con.createStatement();
 
-            String sql = "SELECT * FROM categories WHERE language_id = " + languageId;
+            String sql = getSQLCategories() + languageId;
             rs = stmt.executeQuery(sql);
 
             while(rs.next()) {
@@ -54,7 +54,7 @@ public class SQLCommands {
             con =  DatabaseConnection.getConnection();
             stmt = con.createStatement();
 
-            String sql = "SELECT * FROM Languages";
+            String sql = getSQLLanguage();
             rs = stmt.executeQuery(sql);
 
             while(rs.next()) {
@@ -79,6 +79,13 @@ public class SQLCommands {
         return languages;
     }
 
+    public static String getSQLCategories() {
+        return "SELECT * FROM categories WHERE language_id = ";
+    }
+    public static String getSQLLanguage() {
+        return "SELECT * FROM Languages";
+    }
+
     public static String getSQLQuestions() {
         return "SELECT Q.question_id, Q.question_text, O.option_text, O.is_correct, Q.image_location_data " +
                 "FROM Questions Q " +
@@ -87,12 +94,16 @@ public class SQLCommands {
     }
 
 
-    public static String getSQLpreparedStatement(){
+    public static String getSQLInsertIntoQuestions(){
         return "INSERT INTO Questions(category_id, language_id, question_text, image_location_data) VALUES (?,?,?,?)";
     }
 
-    public static String getSQLOptionStatement() {
+    public static String getSQLInsertIntoOptions() {
         return "INSERT INTO Options (question_id, option_text, is_correct) VALUES (?,?,?)";
+    }
+
+    public static String getSQLAccountsWithUser() {
+        return "SELECT * FROM accounts WHERE username=?";
     }
 
 }
