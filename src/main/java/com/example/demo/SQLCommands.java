@@ -86,4 +86,13 @@ public class SQLCommands {
                 "WHERE Q.language_id = ? AND Q.category_id = ?";
     }
 
+
+    public static String getSQLpreparedStatement(){
+        return "INSERT INTO Questions(category_id, language_id, question_text, image_location_data) VALUES (?,?,?,?)";
+    }
+
+    public static String getSQLOptionStatement() {
+        return "INSERT INTO Options (question_id, option_text, is_correct) VALUES (?,?,?)";
+    }
+
 }
