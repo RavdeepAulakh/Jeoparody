@@ -8,8 +8,7 @@ import java.io.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.nio.*;
-import java.text.*;
+
 
 @MultipartConfig
 public class InputQuestionServlet extends HttpServlet{
@@ -107,7 +106,9 @@ public class InputQuestionServlet extends HttpServlet{
             }
 
             IRepository repo = new Repository();
-            repo.create(catID, languageID, question, fileName, option1, option2, option3, option4, option1Correct, option2Correct, option3Correct, option4Correct);
+            Quiz quiz = new Quiz(catID, languageID, question, fileName, option1, option2, option3, option4, option1Correct, option2Correct, option3Correct, option4Correct);
+
+            repo.create(quiz);
             response.sendRedirect("list");
 
         }

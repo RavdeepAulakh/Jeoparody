@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.mysql.jdbc.Driver;
 
 import java.sql.*;
@@ -10,7 +12,7 @@ public class Repository implements IRepository{
 
     public static final String URL = "jdbc:mysql://localhost:3306/jeoparody";
     public static final String USER = "root";
-    public static final String PASS = "hockey04";
+    public static final String PASS = "Sadra1234.";
 
     private static Connection con;
     private static Statement stmt;
@@ -43,11 +45,25 @@ public class Repository implements IRepository{
     }
 
     @Override
-    public void create(int catID, int languageID, String question, String fileName, String option1, String option2, String option3, String option4, boolean option1Correct, boolean option2Correct, boolean option3Correct, boolean option4Correct) {
+    public void create(Quiz quiz) {
+        String gsonQuiz = quiz.serialize();
+        JsonObject jsonObject = JsonParser.parseString(gsonQuiz).getAsJsonObject();
+
+        // Extract values from the JsonObject
+        int catID = jsonObject.get("catID").getAsInt();
+        int languageID = jsonObject.get("languageID").getAsInt();
+        String question = jsonObject.get("question").getAsString();
+        String fileName = jsonObject.get("fileName").getAsString();
+        String option1 = jsonObject.get("option1").getAsString();
+        String option2 = jsonObject.get("option2").getAsString();
+        String option3 = jsonObject.get("option3").getAsString();
+        String option4 = jsonObject.get("option4").getAsString();
+        boolean option1Correct = jsonObject.get("option1Correct").getAsBoolean();
+        boolean option2Correct = jsonObject.get("option2Correct").getAsBoolean();
+        boolean option3Correct = jsonObject.get("option3Correct").getAsBoolean();
+        boolean option4Correct = jsonObject.get("option4Correct").getAsBoolean();
 
         init();
-
-
 
         try (PreparedStatement preparedStatement = con.prepareStatement(SQLCommands.getSQLInsertIntoQuestions(), Statement.RETURN_GENERATED_KEYS)) {
 
@@ -87,11 +103,6 @@ public class Repository implements IRepository{
                 System.out.println("");
             }
         }
-
-    }
-
-    @Override
-    public void update(Quiz quiz) {
 
     }
 
