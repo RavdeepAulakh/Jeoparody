@@ -7,7 +7,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 
 import java.io.*;
-import java.sql.*;
 
 public class ListAndDeleteQuestionsServlet extends HttpServlet {
 
@@ -73,31 +72,14 @@ public class ListAndDeleteQuestionsServlet extends HttpServlet {
             // Handle the error, maybe redirect to an error page or show an error message
             return;
         }
-        int deleteID = Integer.parseInt(deleteIdStr);
 
-
-        try (Connection con = DatabaseConnection.getConnection();
-             PreparedStatement preparedStatement = con.prepareStatement(SQLCommands.getSQLDeleteFromQuestions())) {
-
-            preparedStatement.setInt(1, deleteID);
-            preparedStatement.executeUpdate();
-
-        } catch(SQLException ex) {
-            handleSQLException(ex);
-        }
+        Repository repo = new Repository();
+        Quiz quiz = new Quiz(deleteIdStr);
+        repo.delete(quiz);
 
         // Redirect back to the same page to refresh the list
         response.sendRedirect("list"); // Replace 'path_to_this_servlet' with the actual path
     }
 
-    private void handleSQLException(SQLException ex) {
-        while (ex != null) {
-            System.out.println("Message: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("ErrorCode: " + ex.getErrorCode());
-            ex = ex.getNextException();
-            System.out.println("");
-        }
-    }
 }
 

@@ -15,7 +15,7 @@ public class Repository implements IRepository{
 
     public static final String URL = "jdbc:mysql://localhost:3306/jeoparody";
     public static final String USER = "root";
-    public static final String PASS = "";
+    public static final String PASS = "Sadra1234.";
 
     private static Connection con;
     private static Statement stmt;
@@ -116,6 +116,7 @@ public class Repository implements IRepository{
 
     @Override
     public void update() {
+        init();
         String query = SQLCommands.getSQLQuestionAndText();
         JsonArray jsonArray = new JsonArray();
 
@@ -149,7 +150,27 @@ public class Repository implements IRepository{
 
     @Override
     public void delete(Quiz quiz) {
+        init();
+        String gsonQuiz = quiz.serialize();
+        JsonObject jsonObject = JsonParser.parseString(gsonQuiz).getAsJsonObject();
 
+        int deleteID = jsonObject.get("deleteQuiz").getAsInt();
+
+        try (Connection con = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = con.prepareStatement(SQLCommands.getSQLDeleteFromQuestions())) {
+
+            preparedStatement.setInt(1, deleteID);
+            preparedStatement.executeUpdate();
+
+        } catch(SQLException ex) {
+            while (ex != null) {
+                System.out.println("Message: " + ex.getMessage());
+                System.out.println("SQLState: " + ex.getSQLState());
+                System.out.println("ErrorCode: " + ex.getErrorCode());
+                ex = ex.getNextException();
+                System.out.println("");
+            }
+        }
     }
 
     @Override
