@@ -3,6 +3,9 @@ package com.example.demo;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mysql.jdbc.Driver;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpSession;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,7 +15,7 @@ public class Repository implements IRepository{
 
     public static final String URL = "jdbc:mysql://localhost:3306/jeoparody";
     public static final String USER = "root";
-    public static final String PASS = "Sadra1234.";
+    public static final String PASS = "";
 
     private static Connection con;
     private static Statement stmt;
@@ -117,9 +120,14 @@ public class Repository implements IRepository{
     }
 
     @Override
-    public List<String> getCategories(int languageId) {
+    public List<String> getCategories(Quiz quiz) {
 
         List<String> categories = new ArrayList<>();
+
+        String gsonQuiz = quiz.serialize();
+        JsonObject jsonObject = JsonParser.parseString(gsonQuiz).getAsJsonObject();
+
+        int languageId = jsonObject.get("languageIDCategory").getAsInt();
 
         try {
 
@@ -181,6 +189,113 @@ public class Repository implements IRepository{
 
 
         return languages;
+    }
+
+    @Override
+    public boolean login(Quiz quiz) {
+
+        init();
+        String gsonQuiz = quiz.serialize();
+        JsonObject jsonObject = JsonParser.parseString(gsonQuiz).getAsJsonObject();
+
+        String username = jsonObject.get("username").getAsString();
+        String enteredPassword = jsonObject.get("enteredPassword").getAsString();
+
+        try {
+
+            String errMsg = "";
+
+            // Retrieve the hashed password from the database
+            PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM accounts WHERE username=?");
+            preparedStatement.setString(1, username);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                String dbHashedPassword = resultSet.getString("password");
+                // Check if the entered password matches the stored hashed password using BCrypt
+                if (BCrypt.checkpw(enteredPassword, dbHashedPassword)) {
+                    return true;
+                } else {
+                    // Failed login
+                    errMsg = "Invalid username or password.";
+                    // You can handle failed login here (e.g., display an error message)
+                }
+            } else {
+                // User not found
+                errMsg = "User not found.";
+                // You can handle this case as needed (e.g., display an error message)
+            }
+
+            preparedStatement.close();
+            con.close();
+        } catch (SQLException ex) {
+            // Handle exceptions
+            ex.printStackTrace();
+            // You can handle errors here (e.g., display an error message)
+        }
+
+        return false;
+
+    }
+
+    @Override
+    public boolean signup(Quiz quiz) {
+
+        init();
+
+        String errMsg = "";
+
+        String gsonQuiz = quiz.serialize();
+        JsonObject jsonObject = JsonParser.parseString(gsonQuiz).getAsJsonObject();
+
+        String username = jsonObject.get("usernameSignup").getAsString();
+        String password = jsonObject.get("password").getAsString();
+
+        try {
+
+
+            // Staff code is correct, proceed with account creation
+            System.out.println("Username: " + username);
+            System.out.println("Password: " + password);
+            String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+            System.out.println("Hashed Password " + hashedPassword);
+
+            // Create an SQL INSERT statement to add the new user
+            String insertSQL = "INSERT INTO accounts (username, password) VALUES (?, ?)";
+
+            // Use PreparedStatement to safely insert the values into the database
+            PreparedStatement preparedStatement = con.prepareStatement(insertSQL);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, hashedPassword);
+
+            // Execute the INSERT statement to add the new user
+            int rowsInserted = preparedStatement.executeUpdate();
+
+            if (rowsInserted > 0) {
+                // User added successfully
+                System.out.println("User " + username + " signed up successfully!");
+                return true;
+            } else {
+                // User signup failed
+                System.out.println("Failed to sign up user " + username);
+            }
+
+            preparedStatement.close();
+
+
+            con.close();
+        } catch (SQLException ex) {
+            errMsg = errMsg + "\n--- SQLException caught ---\n";
+            while (ex != null) {
+                errMsg += "Message: " + ex.getMessage();
+                errMsg += "SQLState: " + ex.getSQLState();
+                errMsg += "ErrorCode: " + ex.getErrorCode();
+                ex = ex.getNextException();
+                errMsg += "";
+            }
+        }
+
+        return false;
     }
 
 }

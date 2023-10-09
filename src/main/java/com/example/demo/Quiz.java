@@ -15,6 +15,11 @@ public class Quiz extends AClass {
     boolean option2Correct;
     boolean option3Correct;
     boolean option4Correct;
+    String username;
+    String enteredPassword;
+    String usernameSignup;
+    String password;
+    int languageIDCategory;
 
     Quiz(int catID, int languageID, String question, String fileName, String option1, String option2, String option3, String option4, boolean option1Correct, boolean option2Correct, boolean option3Correct, boolean option4Correct) {
         this.catID = catID;
@@ -30,6 +35,26 @@ public class Quiz extends AClass {
         this.option3Correct= option3Correct;
         this.option4Correct= option4Correct;
 
+    }
+
+    Quiz(String username, String enteredPassword){
+
+        this.username = username;
+        this.enteredPassword = enteredPassword;
+
+    }
+
+    //variable i is useless here just added so that we can overload constructor properly
+    Quiz(String usernameSignup, String password, int i){
+
+        this.usernameSignup = usernameSignup;
+        this.password = password;
+
+    }
+
+    Quiz(int languageIDCategory){
+
+        this.languageIDCategory = languageIDCategory;
     }
 
     @Override

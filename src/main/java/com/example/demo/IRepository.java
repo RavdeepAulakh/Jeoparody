@@ -9,8 +9,10 @@ public interface IRepository {
         void create(Quiz quiz);
         void delete(Quiz quiz);
         List<String> find();
-        List<String> getCategories(int languageId);
+        List<String> getCategories(Quiz quiz);
         List<String> getLanguages();
+        boolean login(Quiz quiz);
+        boolean signup(Quiz quiz);
 
 
 }

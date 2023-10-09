@@ -31,8 +31,9 @@ public class CategoryServlet extends HttpServlet {
 
         IRepository repository = new Repository();
         int languageId = Integer.parseInt(languageIdParam);
+        Quiz quiz = new Quiz(languageId);
 
-        List<String> categoryInfos = repository.getCategories(languageId);
+        List<String> categoryInfos = repository.getCategories(quiz);
 
         for (String categoryInfo : categoryInfos) {
             String[] parts = categoryInfo.split(",");
