@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 
 public class Quiz extends AClass {
     int catID;
@@ -37,6 +38,10 @@ public class Quiz extends AClass {
 
     }
 
+    Quiz(int catID, int languageID) {
+        this.catID = catID;
+        this.languageID = languageID;
+
     Quiz(String username, String enteredPassword){
 
         this.username = username;
@@ -55,6 +60,7 @@ public class Quiz extends AClass {
     Quiz(int languageIDCategory){
 
         this.languageIDCategory = languageIDCategory;
+
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mysql.jdbc.Driver;
@@ -113,6 +114,96 @@ public class Repository implements IRepository{
     public void delete(Quiz quiz) {
 
     }
+    private JsonArray questionsArray;
+    private JsonArray allOptionsArray;
+    private JsonArray correctAnswersArray;
+    private JsonArray imageLocations;
+    @Override
+    public void getQuizQuestions(Quiz quiz) {
+        String gsonQuiz = quiz.serialize();
+        JsonObject jsonObject = JsonParser.parseString(gsonQuiz).getAsJsonObject();
+
+        JsonArray questionsArray = new JsonArray();
+        JsonArray allOptionsArray = new JsonArray(); // Parent array to hold all option arrays
+        JsonArray correctAnswersArray = new JsonArray();
+        JsonArray imageLocations = new JsonArray();
+
+        // Extract values from the JsonObject
+        int catID = jsonObject.get("catID").getAsInt();
+        int languageID = jsonObject.get("languageID").getAsInt();
+
+        init();
+                try {
+            // Fetch all questions and options for the given language and category
+            String sql = SQLCommands.getSQLQuestions();
+
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, languageID);
+            pstmt.setInt(2, catID);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            int currentQuestionId = -1;
+            JsonArray currentOptionsArray = null; // Using JsonArray for options
+
+            while (rs.next()) {
+                int questionId = rs.getInt("question_id");
+                String questionText = rs.getString("question_text");
+                String optionText = rs.getString("option_text");
+                boolean isCorrect = rs.getBoolean("is_correct");
+                String imageLocation = rs.getString("image_location_data");
+
+                if (currentQuestionId != questionId) {
+                    if (currentOptionsArray != null) {
+                        allOptionsArray.add(currentOptionsArray);
+                    }
+
+                    // New question, add it to the JsonArray
+                    questionsArray.add(questionText);
+
+                    imageLocations.add(imageLocation);
+
+                    // Create a new JsonArray for options
+                    currentOptionsArray = new JsonArray();
+
+                    // Update the current question ID
+                    currentQuestionId = questionId;
+                }
+
+                // Add the option to the current question's options JsonArray
+                currentOptionsArray.add(optionText);
+
+                if (isCorrect) {
+                    correctAnswersArray.add(currentOptionsArray.size() - 1);
+                }
+            }
+
+            // After the loop, add the last optionsArray if it's not null
+            if (currentOptionsArray != null) {
+                allOptionsArray.add(currentOptionsArray);
+            }
+
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+//        System.out.println(questionsArray);
+//        System.out.println(allOptionsArray);
+//        System.out.println(correctAnswersArray);
+//        System.out.println(imageLocations);
+//
+//        JsonObject responseObject = new JsonObject();
+//        responseObject.add("questions", questionsArray);
+//        responseObject.add("optionsList", allOptionsArray);
+//        responseObject.add("correctAnswers", correctAnswersArray);
+//        responseObject.add("images", imageLocations);
+
+        setQuestionsArray(questionsArray);
+        setAllOptionsArray(allOptionsArray);
+        setCorrectAnswersArray(correctAnswersArray);
+        setImageLocations(imageLocations);
+    }
 
     @Override
     public List<String> find() {
@@ -191,6 +282,41 @@ public class Repository implements IRepository{
         return languages;
     }
 
+    @Override
+    public void setQuestionsArray(JsonArray questionsArray) {
+        this.questionsArray = questionsArray;
+    }
+    @Override
+    public JsonArray getQuestionsArray(){
+       return this.questionsArray;
+    }
+
+    @Override
+    public void setAllOptionsArray(JsonArray allOptionsArray) {
+        this.allOptionsArray = allOptionsArray;
+    }
+    @Override
+    public JsonArray getAllOptionsArray(){
+        return this.allOptionsArray;
+    }
+
+    @Override
+    public void setCorrectAnswersArray(JsonArray correctAnswersArray) {
+        this.correctAnswersArray = correctAnswersArray;
+    }
+    @Override
+    public JsonArray getCorrectAnswersArray(){
+        return this.correctAnswersArray;
+    }
+
+    @Override
+    public void setImageLocations(JsonArray imageLocations) {
+        this.imageLocations = imageLocations;
+    }
+    @Override
+    public JsonArray getImageLocations(){
+        return this.imageLocations;
+      
     @Override
     public boolean login(Quiz quiz) {
 
