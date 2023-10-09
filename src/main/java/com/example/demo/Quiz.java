@@ -41,8 +41,9 @@ public class Quiz extends AClass {
     Quiz(int catID, int languageID) {
         this.catID = catID;
         this.languageID = languageID;
+    }
 
-    Quiz(String username, String enteredPassword){
+    Quiz(String username, String enteredPassword) {
 
         this.username = username;
         this.enteredPassword = enteredPassword;
@@ -50,7 +51,7 @@ public class Quiz extends AClass {
     }
 
     //variable i is useless here just added so that we can overload constructor properly
-    Quiz(String usernameSignup, String password, int i){
+    Quiz(String usernameSignup, String password, int i) {
 
         this.usernameSignup = usernameSignup;
         this.password = password;
@@ -58,7 +59,6 @@ public class Quiz extends AClass {
     }
 
     Quiz(int languageIDCategory){
-
         this.languageIDCategory = languageIDCategory;
 
     }

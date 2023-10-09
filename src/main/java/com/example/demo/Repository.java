@@ -314,53 +314,55 @@ public class Repository implements IRepository{
         this.imageLocations = imageLocations;
     }
     @Override
-    public JsonArray getImageLocations(){
+    public JsonArray getImageLocations() {
         return this.imageLocations;
-      
+    }
+
     @Override
     public boolean login(Quiz quiz) {
 
-        init();
-        String gsonQuiz = quiz.serialize();
-        JsonObject jsonObject = JsonParser.parseString(gsonQuiz).getAsJsonObject();
+            init();
+            String gsonQuiz = quiz.serialize();
+            JsonObject jsonObject = JsonParser.parseString(gsonQuiz).getAsJsonObject();
 
-        String username = jsonObject.get("username").getAsString();
-        String enteredPassword = jsonObject.get("enteredPassword").getAsString();
+            String username = jsonObject.get("username").getAsString();
+            String enteredPassword = jsonObject.get("enteredPassword").getAsString();
 
-        try {
+            try {
 
-            String errMsg = "";
+                String errMsg = "";
 
-            // Retrieve the hashed password from the database
-            PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM accounts WHERE username=?");
-            preparedStatement.setString(1, username);
-            ResultSet resultSet = preparedStatement.executeQuery();
+                // Retrieve the hashed password from the database
+                PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM accounts WHERE username=?");
+                preparedStatement.setString(1, username);
+                ResultSet resultSet = preparedStatement.executeQuery();
 
-            if (resultSet.next()) {
-                String dbHashedPassword = resultSet.getString("password");
-                // Check if the entered password matches the stored hashed password using BCrypt
-                if (BCrypt.checkpw(enteredPassword, dbHashedPassword)) {
-                    return true;
+                if (resultSet.next()) {
+                    String dbHashedPassword = resultSet.getString("password");
+                    // Check if the entered password matches the stored hashed password using BCrypt
+                    if (BCrypt.checkpw(enteredPassword, dbHashedPassword)) {
+                        return true;
+                    } else {
+                        // Failed login
+                        errMsg = "Invalid username or password.";
+                        // You can handle failed login here (e.g., display an error message)
+                    }
                 } else {
-                    // Failed login
-                    errMsg = "Invalid username or password.";
-                    // You can handle failed login here (e.g., display an error message)
+                    // User not found
+                    errMsg = "User not found.";
+                    // You can handle this case as needed (e.g., display an error message)
                 }
-            } else {
-                // User not found
-                errMsg = "User not found.";
-                // You can handle this case as needed (e.g., display an error message)
+
+                preparedStatement.close();
+                con.close();
+            } catch (SQLException ex) {
+                // Handle exceptions
+                ex.printStackTrace();
+                // You can handle errors here (e.g., display an error message)
             }
 
-            preparedStatement.close();
-            con.close();
-        } catch (SQLException ex) {
-            // Handle exceptions
-            ex.printStackTrace();
-            // You can handle errors here (e.g., display an error message)
-        }
 
-        return false;
+            return false;
 
     }
 

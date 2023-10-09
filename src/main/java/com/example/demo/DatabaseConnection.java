@@ -9,7 +9,7 @@ public class DatabaseConnection {
 
     public static final String URL = "jdbc:mysql://localhost:3306/jeoparody";
     public static final String USER = "root";
-    public static final String PASS = "hockey04";
+    public static final String PASS = "";
 
     /**
      * Get a connection to database
