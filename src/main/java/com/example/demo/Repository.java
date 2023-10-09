@@ -15,7 +15,7 @@ public class Repository implements IRepository{
 
     public static final String URL = "jdbc:mysql://localhost:3306/jeoparody";
     public static final String USER = "root";
-    public static final String PASS = "Sadra1234.";
+    public static final String PASS = "";
 
     private static Connection con;
     private static Statement stmt;
