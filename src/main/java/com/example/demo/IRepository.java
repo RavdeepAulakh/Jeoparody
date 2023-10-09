@@ -14,8 +14,10 @@ public interface IRepository {
         void getQuizQuestions(Quiz quiz);
 
         List<String> find();
-        List<String> getCategories(int languageId);
+        List<String> getCategories(Quiz quiz);
         List<String> getLanguages();
+        boolean login(Quiz quiz);
+        boolean signup(Quiz quiz);
 
         void setQuestionsArray(JsonArray questionsArray);
 

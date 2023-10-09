@@ -29,7 +29,7 @@ public class ListAndDeleteQuestionsServlet extends HttpServlet {
                         insideQuestionsDiv = true;
 
                         // Generate the questions here
-                        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jeoparody", "root", "hockey04")) {
+                        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jeoparody", "root", "")) {
                             String query = SQLCommands.getSQLQuestionAndText();
                             try (PreparedStatement stmt = con.prepareStatement(query)) {
                                 ResultSet rs = stmt.executeQuery();

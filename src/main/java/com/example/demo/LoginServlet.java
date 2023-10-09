@@ -2,9 +2,7 @@ package com.example.demo;
 
 import jakarta.servlet.http.*;
 import jakarta.servlet.*;
-import java.sql.*;
 import java.io.*;
-import org.mindrot.jbcrypt.BCrypt; // Import the BCrypt library
 
 public class LoginServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -24,49 +22,23 @@ public class LoginServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         String errMsg = "";
-        Connection con = null;
 
-        try {
+        // Retrieve username and plaintext password from the HTTP request
+        String username = request.getParameter("user_id");
+        String enteredPassword = request.getParameter("password");
 
-            con = DatabaseConnection.getConnection();
+        IRepository repo = new Repository();
+        Quiz quiz = new Quiz(username, enteredPassword);
 
-            // Retrieve username and plaintext password from the HTTP request
-            String username = request.getParameter("user_id");
-            String enteredPassword = request.getParameter("password");
+       boolean loggedin = repo.login(quiz);
 
-            // Retrieve the hashed password from the database
-            PreparedStatement preparedStatement = con.prepareStatement(SQLCommands.getSQLAccountsWithUser());
-            preparedStatement.setString(1, username);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            if (resultSet.next()) {
-                String dbHashedPassword = resultSet.getString("password");
-                // Check if the entered password matches the stored hashed password using BCrypt
-                if (BCrypt.checkpw(enteredPassword, dbHashedPassword)) {
-                    // Successful login
-                    HttpSession session = request.getSession(true);
-                    session.setAttribute("USER_ID", username);
-                    Cookie userLoggedInCookie = new Cookie("userLoggedIn", "true");
-                    response.addCookie(userLoggedInCookie);
-                    response.sendRedirect("index.html"); // Redirect to the home page
-                } else {
-                    // Failed login
-                    errMsg = "Invalid username or password.";
-                    // You can handle failed login here (e.g., display an error message)
-                }
-            } else {
-                // User not found
-                errMsg = "User not found.";
-                // You can handle this case as needed (e.g., display an error message)
-            }
-
-            preparedStatement.close();
-            con.close();
-        } catch (SQLException ex) {
-            // Handle exceptions
-            ex.printStackTrace();
-            errMsg = "An error occurred during login.";
-            // You can handle errors here (e.g., display an error message)
+        if(loggedin) {
+            // Successful login
+            HttpSession session = request.getSession(true);
+            session.setAttribute("USER_ID", username);
+            Cookie userLoggedInCookie = new Cookie("userLoggedIn", "true");
+            response.addCookie(userLoggedInCookie);
+            response.sendRedirect("index.html"); // Redirect to the home page
         }
 
         // If login failed or an error occurred, display an error message
