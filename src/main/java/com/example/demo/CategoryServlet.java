@@ -2,11 +2,6 @@ package com.example.demo;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
 import jakarta.servlet.ServletException;
@@ -34,9 +29,10 @@ public class CategoryServlet extends HttpServlet {
             return;
         }
 
+        IRepository repository = new Repository();
         int languageId = Integer.parseInt(languageIdParam);
 
-        List<String> categoryInfos = SQLCommands.getCategories(languageId);
+        List<String> categoryInfos = repository.getCategories(languageId);
 
         for (String categoryInfo : categoryInfos) {
             String[] parts = categoryInfo.split(",");

@@ -25,8 +25,8 @@ public class LanguageServlet extends HttpServlet {
         // Include the HTML content from language.html
         request.getRequestDispatcher("/language.html").include(request, response);
 
-
-        List<String> languagesInfos = SQLCommands.getLanguages();
+        IRepository repo = new Repository();
+        List<String> languagesInfos = repo.getLanguages();
 
         for (String languagesInfo : languagesInfos) {
             String[] parts = languagesInfo.split(",");

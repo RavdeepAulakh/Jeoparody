@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.nio.*;
-import java.sql.*;
 import java.text.*;
 
 @MultipartConfig
@@ -75,7 +74,7 @@ public class InputQuestionServlet extends HttpServlet{
         if(question.equals("")) question = "No Question";
         System.out.println(">>>>>" + imageCaption + category + question + option1 + option2 + option3 + option4 + fileName);
 
-        try (Connection con = DatabaseConnection.getConnection()) {
+
             int catID = 1;
             int languageID = 1;
             switch (category) {
@@ -107,56 +106,10 @@ public class InputQuestionServlet extends HttpServlet{
                     break;
             }
 
-            try (PreparedStatement preparedStatement = con.prepareStatement(SQLCommands.getSQLInsertIntoQuestions(), Statement.RETURN_GENERATED_KEYS)) {
-                //            UUID uuid = UUID.randomUUID();
-                // if image is null (meaning its url or neither)
-                // if url is null (meaning its image)
-                // else set image and url to null
-                preparedStatement.setInt(1, catID);
-                preparedStatement.setInt(2, languageID);
-                preparedStatement.setString(3, question);
-                preparedStatement.setString(4, "/images/" + fileName);
-//            preparedStatement.setBinaryStream(7, filePart.getInputStream());
-                int row = preparedStatement.executeUpdate();
-                int questionID = -1;
-                ResultSet rs = preparedStatement.getGeneratedKeys();
-                if (rs.next()) {
-                    questionID = rs.getInt(1);
-                }
-                preparedStatement.close();
+            IRepository repo = new Repository();
+            repo.create(catID, languageID, question, fileName, option1, option2, option3, option4, option1Correct, option2Correct, option3Correct, option4Correct);
+            response.sendRedirect("list");
 
-                if (questionID != -1) {
-                    String[] optionText = { option1, option2, option3, option4 };
-                    boolean[] optionValues = {option1Correct, option2Correct, option3Correct, option4Correct};
-                    for (int i = 0; i < optionText.length; i++) {
-                        PreparedStatement optionStatement = con.prepareStatement(SQLCommands.getSQLInsertIntoOptions());
-                        optionStatement.setInt(1, questionID);
-                        optionStatement.setString(2,optionText[i]);
-                        optionStatement.setBoolean(3, optionValues[i]);
-                        row = optionStatement.executeUpdate();
-                        optionStatement.close();
-                    }
-                    response.sendRedirect("list");
-                }
-                //con.close();
-            } catch(SQLException ex) {
-                while (ex != null) {
-                    System.out.println("Message: " + ex.getMessage ());
-                    System.out.println("SQLState: " + ex.getSQLState ());
-                    System.out.println("ErrorCode: " + ex.getErrorCode ());
-                    ex = ex.getNextException();
-                    System.out.println("");
-                }
-            }
-
-        } catch(SQLException ex) {
-            while (ex != null) {
-                System.out.println("Message: " + ex.getMessage ());
-                System.out.println("SQLState: " + ex.getSQLState ());
-                System.out.println("ErrorCode: " + ex.getErrorCode ());
-                ex = ex.getNextException();
-                System.out.println("");
-            }
         }
     }
-}
+
