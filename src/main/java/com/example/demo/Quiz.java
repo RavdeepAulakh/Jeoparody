@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 
 public class Quiz extends AClass {
     int catID;
@@ -29,6 +30,12 @@ public class Quiz extends AClass {
         this.option2Correct= option2Correct;
         this.option3Correct= option3Correct;
         this.option4Correct= option4Correct;
+
+    }
+
+    Quiz(int catID, int languageID) {
+        this.catID = catID;
+        this.languageID = languageID;
 
     }
 
