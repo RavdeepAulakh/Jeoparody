@@ -3,9 +3,8 @@ package com.example.demo;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
 import com.mysql.jdbc.Driver;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpSession;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
@@ -21,6 +20,11 @@ public class Repository implements IRepository{
     private static Connection con;
     private static Statement stmt;
     private static ResultSet rs;
+
+    private JsonArray questionsArray;
+    private JsonArray allOptionsArray;
+    private JsonArray correctAnswersArray;
+    private JsonArray imageLocations;
 
     @Override
     public void init() {
@@ -111,13 +115,43 @@ public class Repository implements IRepository{
     }
 
     @Override
+    public void update() {
+        String query = SQLCommands.getSQLQuestionAndText();
+        JsonArray jsonArray = new JsonArray();
+
+        try (PreparedStatement stmt = con.prepareStatement(query)) {
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                int questionId = rs.getInt("question_id");
+                String questionText = rs.getString("question_text");
+
+                // Create a JsonObject for each row
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.add("questionId", new JsonPrimitive(questionId));
+                jsonObject.add("questionText", new JsonPrimitive(questionText));
+
+                // Add the JsonObject to the JsonArray
+                jsonArray.add(jsonObject);
+            }
+        } catch (SQLException ex) {
+            while (ex != null) {
+                System.out.println("Message: " + ex.getMessage());
+                System.out.println("SQLState: " + ex.getSQLState());
+                System.out.println("ErrorCode: " + ex.getErrorCode());
+                ex = ex.getNextException();
+                System.out.println("");
+            }
+        }
+
+        // Now jsonArray contains all the question IDs and question texts
+        setQuestionsArray(jsonArray);
+    }
+
+    @Override
     public void delete(Quiz quiz) {
 
     }
-    private JsonArray questionsArray;
-    private JsonArray allOptionsArray;
-    private JsonArray correctAnswersArray;
-    private JsonArray imageLocations;
+
     @Override
     public void getQuizQuestions(Quiz quiz) {
         String gsonQuiz = quiz.serialize();
@@ -187,17 +221,6 @@ public class Repository implements IRepository{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-//        System.out.println(questionsArray);
-//        System.out.println(allOptionsArray);
-//        System.out.println(correctAnswersArray);
-//        System.out.println(imageLocations);
-//
-//        JsonObject responseObject = new JsonObject();
-//        responseObject.add("questions", questionsArray);
-//        responseObject.add("optionsList", allOptionsArray);
-//        responseObject.add("correctAnswers", correctAnswersArray);
-//        responseObject.add("images", imageLocations);
 
         setQuestionsArray(questionsArray);
         setAllOptionsArray(allOptionsArray);
@@ -277,7 +300,6 @@ public class Repository implements IRepository{
                 e.printStackTrace();
             }
         }
-
 
         return languages;
     }

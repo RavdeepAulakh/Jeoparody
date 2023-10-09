@@ -1,5 +1,8 @@
 
 package com.example.demo;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 
@@ -17,7 +20,6 @@ public class ListAndDeleteQuestionsServlet extends HttpServlet {
         if (session != null && session.getAttribute("USER_ID") != null) {
             // The session is valid, and the user is logged in
             String username = (String) session.getAttribute("USER_ID");
-//            System.out.println(username);
             try (InputStream inputStream = getServletContext().getResourceAsStream("/questions.html")) {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                 PrintWriter out = response.getWriter();
@@ -28,34 +30,22 @@ public class ListAndDeleteQuestionsServlet extends HttpServlet {
                         out.println(line);
                         insideQuestionsDiv = true;
 
-                        // Generate the questions here
-                        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jeoparody", "root", "")) {
-                            String query = SQLCommands.getSQLQuestionAndText();
-                            try (PreparedStatement stmt = con.prepareStatement(query)) {
-                                ResultSet rs = stmt.executeQuery();
-                                while (rs.next()) {
-                                    int questionId = rs.getInt("question_id");
-                                    String questionText = rs.getString("question_text");
-//                                    System.out.println(">>>>>" + questionId + questionText);
-                                    out.println("<div class=\"question-item\">");
-                                    out.println("<p>" + questionText + "</p>");
-                                    out.println("<form method='post' action='list'>");
-                                    out.println("<input type='hidden' name='delete_id' value='" + questionId + "'>");
-                                    out.println("<input type='submit' value='Delete'>");
-                                    out.println("</form>");
-                                    out.println("</div>");
-                                }
-                            }
-                        } catch (SQLException ex) {
-                            while (ex != null) {
-                                System.out.println("Message: " + ex.getMessage ());
-                                System.out.println("SQLState: " + ex.getSQLState ());
-                                System.out.println("ErrorCode: " + ex.getErrorCode ());
-                                ex = ex.getNextException();
-                                System.out.println("");
-                            }
-                        }
+                        Repository repo = new Repository();
+                        repo.update();
+                        JsonArray questionsAndIds = repo.getQuestionsArray();
 
+                        for (JsonElement element : questionsAndIds) {
+                            JsonObject questionObject = element.getAsJsonObject();
+                            int questionId = questionObject.get("questionId").getAsInt();
+                            String questionText = questionObject.get("questionText").getAsString();
+                            out.println("<div class=\"question-item\">");
+                            out.println("<p>" + questionText + "</p>");
+                            out.println("<form method='post' action='list'>");
+                            out.println("<input type='hidden' name='delete_id' value='" + questionId + "'>");
+                            out.println("<input type='submit' value='Delete'>");
+                            out.println("</form>");
+                            out.println("</div>");
+                        }
                     } else if (insideQuestionsDiv && line.trim().equals("</div>")) {
                         insideQuestionsDiv = false;
                     }
@@ -74,7 +64,6 @@ public class ListAndDeleteQuestionsServlet extends HttpServlet {
         }
     }
 
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -86,8 +75,6 @@ public class ListAndDeleteQuestionsServlet extends HttpServlet {
         }
         int deleteID = Integer.parseInt(deleteIdStr);
 
-
-//        int deleteID = Integer.parseInt(request.getParameter("delete_id"));
 
         try (Connection con = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = con.prepareStatement(SQLCommands.getSQLDeleteFromQuestions())) {
