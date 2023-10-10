@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -28,16 +29,32 @@ public class LanguageServlet extends HttpServlet {
         IRepository repo = new Repository();
         List<String> languagesInfos = repo.getLanguages();
 
-        for (String languagesInfo : languagesInfos) {
-            String[] parts = languagesInfo.split(",");
-            if (parts.length == 2) {
-                int language_id = Integer.parseInt(parts[0]);
-                String language_name = parts[1];
+        /**
+         * Incorporates Stream API to process list of languageInfos, instead
+         * of the for loop. Filtering is done to map valid languageInfo to
+         * HTML button format.
+         */
+        String htmlButtons = languagesInfos.stream()
+                .map(languageInfo -> languageInfo.split(","))
+                .filter(parts -> parts.length == 2)
+                .map(parts -> {
+                    int language_id = Integer.parseInt(parts[0]);
+                    String language_name = parts[1];
+                    return "<div class=\"button\" onclick=\"selectLanguage(" + language_id + ")\">" + language_name + "</div>";
+                })
+                .collect(Collectors.joining());
 
-                    // Create a button for each category
-                out.println("<div class=\"button\" onclick=\"selectLanguage(" + language_id + ")\">" + language_name + "</div>");
-            }
-        }
+        out.println(htmlButtons);
+//        for (String languagesInfo : languagesInfos) {
+//            String[] parts = languagesInfo.split(",");
+//            if (parts.length == 2) {
+//                int language_id = Integer.parseInt(parts[0]);
+//                String language_name = parts[1];
+//
+//                    // Create a button for each category
+//                out.println("<div class=\"button\" onclick=\"selectLanguage(" + language_id + ")\">" + language_name + "</div>");
+//            }
+//        }
 
 
         // JavaScript function to handle button click
