@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
         formData.append("option4_correct", "false");
 
 
-        fetch("upload", {
+        fetch("create", {
             method: 'POST',
             body: formData
         })

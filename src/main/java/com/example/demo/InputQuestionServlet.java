@@ -1,7 +1,5 @@
 package com.example.demo;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.*;
@@ -21,9 +19,7 @@ public class InputQuestionServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession(false);
         if (session != null && session.getAttribute("USER_ID") != null) {
-            // The session is valid, and the user is logged in
             String username = (String) session.getAttribute("USER_ID");
-            // Your code for handling the authenticated user here
             try (InputStream inputStream = getServletContext().getResourceAsStream("/submit.html")) {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                 PrintWriter out = response.getWriter();
@@ -36,8 +32,6 @@ public class InputQuestionServlet extends HttpServlet {
                 reader.close();
             }
         } else {
-            // No valid session exists or the user is not logged in
-            // You can handle this case as needed (e.g., redirect to the login page)
             response.sendRedirect("login");
         }
 
