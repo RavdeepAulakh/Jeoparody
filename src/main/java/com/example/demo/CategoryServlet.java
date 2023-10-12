@@ -35,7 +35,11 @@ public class CategoryServlet extends HttpServlet {
 
         List<String> categoryInfos = repository.getCategories(quiz);
 
-        for (String categoryInfo : categoryInfos) {
+        /**
+         * Replaced the for loop with the forEach, which is provided by the
+         * Stream API.
+         */
+        categoryInfos.stream().forEach(categoryInfo -> {
             String[] parts = categoryInfo.split(",");
             if (parts.length == 2) {
                 int categoryId = Integer.parseInt(parts[0]);
@@ -44,7 +48,19 @@ public class CategoryServlet extends HttpServlet {
                 // Create a button for each category
                 out.println("<div class=\"button\" onclick=\"selectCategory(" + categoryId + ")\">" + categoryName + "</div>");
             }
-        }
+        });
+
+
+//        for (String categoryInfo : categoryInfos) {
+//            String[] parts = categoryInfo.split(",");
+//            if (parts.length == 2) {
+//                int categoryId = Integer.parseInt(parts[0]);
+//                String categoryName = parts[1];
+//
+//                // Create a button for each category
+//                out.println("<div class=\"button\" onclick=\"selectCategory(" + categoryId + ")\">" + categoryName + "</div>");
+//            }
+//        }
 
 
         // JavaScript function to handle button click
