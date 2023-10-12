@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.*;
@@ -11,7 +13,7 @@ import java.io.PrintWriter;
 
 
 @MultipartConfig
-public class InputQuestionServlet extends HttpServlet{
+public class InputQuestionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -24,7 +26,8 @@ public class InputQuestionServlet extends HttpServlet{
             // Your code for handling the authenticated user here
             try (InputStream inputStream = getServletContext().getResourceAsStream("/submit.html")) {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-                PrintWriter out = response.getWriter(); {
+                PrintWriter out = response.getWriter();
+                {
                     String line;
                     while ((line = reader.readLine()) != null) {
                         out.println(line);
@@ -43,36 +46,45 @@ public class InputQuestionServlet extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Part filePart = request.getPart("image");
-        String imageCaption = request.getParameter("imageCaption");
-        String category = request.getParameter("categories");
-        String language = request.getParameter("languages");
-        String question = request.getParameter("question");
-        String option1 = request.getParameter("option1");
-        String option2 = request.getParameter("option2");
-        String option3 = request.getParameter("option3");
-        String option4 = request.getParameter("option4");
-        boolean option1Correct = Boolean.parseBoolean(request.getParameter("option1_correct"));
-        boolean option2Correct = Boolean.parseBoolean(request.getParameter("option2_correct"));
-        boolean option3Correct = Boolean.parseBoolean(request.getParameter("option3_correct"));
-        boolean option4Correct = Boolean.parseBoolean(request.getParameter("option4_correct"));
-        String uploadDirectory = getServletContext().getRealPath("/") + "images/";
-        String fileName = filePart.getSubmittedFileName();
-        String filePath = uploadDirectory + fileName;
-        try (OutputStream out = new FileOutputStream(filePath)) {
-            InputStream fileContent = filePart.getInputStream();
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = fileContent.read(buffer)) != -1) {
-                out.write(buffer, 0, bytesRead);
-            }
-        } catch (IOException e) {
-            // Handle the exception (e.g., log or display an error message)
-            e.printStackTrace();
-        }
-        if(question.equals("")) question = "No Question";
-        System.out.println(">>>>>" + imageCaption + category + question + option1 + option2 + option3 + option4 + fileName);
 
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+
+        try {
+            Part filePart = request.getPart("image");
+            String imageCaption = request.getParameter("imageCaption");
+            String category = request.getParameter("categories");
+            String language = request.getParameter("languages");
+            String question = request.getParameter("question");
+            String option1 = request.getParameter("option1");
+            String option2 = request.getParameter("option2");
+            String option3 = request.getParameter("option3");
+            String option4 = request.getParameter("option4");
+            boolean option1Correct = Boolean.parseBoolean(request.getParameter("option1_correct"));
+            boolean option2Correct = Boolean.parseBoolean(request.getParameter("option2_correct"));
+            boolean option3Correct = Boolean.parseBoolean(request.getParameter("option3_correct"));
+            boolean option4Correct = Boolean.parseBoolean(request.getParameter("option4_correct"));
+            String uploadDirectory = getServletContext().getRealPath("/") + "images/";
+            String fileName = filePart.getSubmittedFileName();
+            String filePath = uploadDirectory + fileName;
+
+            try (OutputStream fileOut = new FileOutputStream(filePath)) {
+                InputStream fileContent = filePart.getInputStream();
+                byte[] buffer = new byte[1024];
+                int bytesRead;
+                while ((bytesRead = fileContent.read(buffer)) != -1) {
+                    fileOut.write(buffer, 0, bytesRead);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                response.setStatus(500);
+                out.print("{\"status\": \"error\", \"message\": \"Failed to save the image.\"}");
+                out.flush();
+                return;
+            }
+
+            if (question.equals("")) question = "No Question";
 
             int catID = 1;
             int languageID = 1;
@@ -107,10 +119,18 @@ public class InputQuestionServlet extends HttpServlet{
 
             IRepository repo = new Repository();
             Quiz quiz = new Quiz(catID, languageID, question, fileName, option1, option2, option3, option4, option1Correct, option2Correct, option3Correct, option4Correct);
-
             repo.create(quiz);
-            response.sendRedirect("list");
 
+            response.setStatus(200);
+            out.print("{\"status\": \"success\", \"message\": \"Question submitted successfully!\"}");
+            out.flush();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.setStatus(400);
+            out.print("{\"status\": \"error\", \"message\": \"Failed to submit question.\"}");
+            out.flush();
         }
     }
+}
 
