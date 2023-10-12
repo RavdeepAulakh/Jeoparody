@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aspectj>
+    <weaver>
+        <!-- only weave classes in these packages -->
+        <include within="com.example..*"/>
+    </weaver>
+    <aspects>
+        <!-- define which aspects to weave -->
+        <aspect name="com.example.demo.LoggingAspect"/>
+    </aspects>
+</aspectj>
