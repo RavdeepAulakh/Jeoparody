@@ -98,9 +98,9 @@ public class SQLCommands {
 
 
     /** fetches data from a database using the given SQL,
-    * then uses the provided function to process each piece of data,
-    * and finally returns a list of the processed data.
-    * It uses lambdas and the Stream API to handle the data in a streamlined way.
+     * then uses the provided function to process each piece of data,
+     * and finally returns a list of the processed data.
+     * It uses lambdas and the Stream API to handle the data in a streamlined way.
      */
     private static <T> List<T> executeQuery(String sql, ResultSetMapper<T> mapper) {
         try (Connection con = DatabaseConnection.getConnection();
