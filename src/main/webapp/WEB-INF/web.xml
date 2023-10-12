@@ -81,7 +81,7 @@
 
     <servlet-mapping>
         <servlet-name>InputQuestionServlet</servlet-name>
-        <url-pattern>/upload</url-pattern>
+        <url-pattern>/create</url-pattern>
     </servlet-mapping>
 
     <servlet>
