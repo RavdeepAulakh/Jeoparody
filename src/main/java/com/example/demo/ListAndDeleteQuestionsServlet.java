@@ -40,8 +40,8 @@ public class ListAndDeleteQuestionsServlet extends HttpServlet {
                             out.println("<div class=\"question-item\">");
                             out.println("<p>" + questionText + "</p>");
                             out.println("<form method='post' action='list'>");
-                            out.println("<input type='hidden' name='delete_id' value='" + questionId + "'>");
-                            out.println("<input type='submit' value='Delete'>");
+                            out.println("<input type='hidden' name='delete_id' id='delete_this_id' value='" + questionId + "'>");
+                            out.println("<input type='submit' value='Delete'> id='deleteForm'");
                             out.println("</form>");
                             out.println("</div>");
                         }
@@ -64,17 +64,17 @@ public class ListAndDeleteQuestionsServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String deleteIdStr = request.getParameter("delete_id");
-        if (deleteIdStr == null || deleteIdStr.isEmpty()) {
-            System.out.println(deleteIdStr);
+        String deleteIdStr_2 = request.getParameter("delete_id");
+        if (deleteIdStr_2 == null || deleteIdStr_2.isEmpty()) {
+            System.out.println(deleteIdStr_2);
             // Handle the error, maybe redirect to an error page or show an error message
             return;
         }
 
         Repository repo = new Repository();
-        Quiz quiz = new Quiz(deleteIdStr);
+        Quiz quiz = new Quiz(deleteIdStr_2);
         repo.delete(quiz);
 
         // Redirect back to the same page to refresh the list
@@ -82,4 +82,6 @@ public class ListAndDeleteQuestionsServlet extends HttpServlet {
     }
 
 }
+
+
 
